@@ -1,0 +1,43 @@
+# June Lim
+
+Technology, translated for humans.
+I build AI products people trust and actually use.
+
+- Email: junelim@berkeley.edu
+- LinkedIn: https://www.linkedin.com/in/jeeyoon-june-lim/
+- GitHub: https://github.com/junelim12
+- Location: Berkeley, CA
+- Seeking: Summer 2027 roles in AI product and AI go-to-market
+
+## Use
+### A.Phone, SK Telecom (AI Product Manager, 2021-2024)
+- Found in user data that a 70% Android base locked out iPhone users in their 20s
+- Built the industry's first iPhone call recording (mVoIP, within Apple's guidelines)
+- 0 to 1 in 4 months; 1M MAU in 6 months; 10M+ MAU by Feb 2026
+- 7M iOS users vs. 2M on the legacy app; call app pool grew from 10M to 14.5M
+- Top 3 company-wide achievement, 2024
+
+## Trust
+### Incheon Fire Department
+- Fixed spam filtering that hid firefighters' callbacks; added caller ID for first responders
+- Emergency call success 74.7% to 85.8%; missed-call callbacks 27.9% to 49.5%
+### AI safety at launch
+- Hallucination launch criteria agreed by engineering and legal
+- Privacy masking false positives cut 36%
+
+## Translate
+### SKT AI Platform (GTM & Global Partnerships, 2024-2025)
+- LLM Gateway grown to 4M+ daily requests in year one
+- Integrated OpenAI, Anthropic, AWS, and Adobe
+- Exclusive OpenAI B2C partnership at 75% below the initial ask
+- Together AI investment; LLM serving costs cut 30%
+### Keynote narrative
+- AI-first story for C-level keynotes at CES 2025, MWC, DTW Ignite, and AWS Summit Seoul (26,000+ executives)
+
+## Building now
+- OWOL Archive, Founder (2025-2026): AI booking and translation agent; 20+ owner interviews; pivoted into existing messengers; halted after weighing costs against willingness to pay
+- Side projects: Saju, GTM, Character chat, Voice AI content automation
+
+## Education
+- UC Berkeley Haas, MBA (expected 2028), AI for Business Certificate
+- Sogang University, BA, Cum Laude (2019)

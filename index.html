@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>June Lim · Technology, translated for humans</title>
+<meta name="description" content="June Lim builds AI products people trust and actually use. AI product and go-to-market, Berkeley Haas MBA '28.">
+<meta property="og:title" content="June Lim">
+<meta property="og:description" content="June Lim builds AI products people trust and actually use. AI product and go-to-market, Berkeley Haas MBA '28.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://junelim12.github.io/">
+<meta property="og:image" content="https://junelim12.github.io/photos/call.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2326211D'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-style='italic' font-size='34' text-anchor='middle' fill='%23E3AA55'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="Profile for AI agents">
+<style>
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..500,0..100&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field notebook for a Tech Humanist. Each chapter is one word of the tagline (Use, Trust, Translate).
+   Photos sit where a human moment proves the claim; every case carries a small "translation" from tech to human. */
+:root{
+  --paper:#FBF8F3;
+  --card:#FFFFFF;
+  --band:#F3EDE4;
+  --ink:#26211D;
+  --muted:#7A7068;
+  --line:rgba(38,33,29,.12);
+  --honey:#B97A1E;
+  --honey-soft:#F4E3C6;
+  --display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --body:"Figtree",-apple-system,"Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --max:1200px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1A1613;--card:#221D19;--band:#2A231E;--ink:#F3ECE2;--muted:#A99E93;
+    --line:rgba(243,236,226,.12);--honey:#E3AA55;--honey-soft:#3A2D1C;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1A1613;--card:#221D19;--band:#2A231E;--ink:#F3ECE2;--muted:#A99E93;
+  --line:rgba(243,236,226,.12);--honey:#E3AA55;--honey-soft:#3A2D1C;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--honey);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--display);font-variation-settings:"SOFT" 100;font-weight:350;letter-spacing:-.015em;text-wrap:balance;margin:0}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hl{background:linear-gradient(transparent 62%,var(--honey-soft) 62%);padding:0 .08em}
+
+/* ---------- top ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:62px}
+.mark{font-family:var(--display);font-style:italic;font-size:23px;text-decoration:none;font-variation-settings:"SOFT" 100}
+.nav{display:flex;gap:26px;font-size:14px}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.04em;display:flex;align-items:center;gap:8px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--honey);box-shadow:0 0 0 4px var(--honey-soft)}
+
+/* ---------- photo slots ---------- */
+/* To use a real photo: replace the .ph div inside a .slot with <img src="..." alt="...">. */
+.slot{position:relative;margin:0;border-radius:6px;overflow:hidden;background:var(--band);max-width:100%}
+.slot img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.slot .ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:20px;
+  background:radial-gradient(120% 90% at 30% 20%,color-mix(in srgb,var(--honey-soft) 80%,transparent),transparent 60%),var(--band)}
+.slot .ph::before,.slot .ph::after{content:"";position:absolute;width:18px;height:18px;border:1px solid var(--muted);opacity:.5}
+.slot .ph::before{top:14px;left:14px;border-right:0;border-bottom:0}
+.slot .ph::after{top:14px;right:14px;border-left:0;border-bottom:0}
+.slot .ph b{font-family:var(--display);font-weight:350;font-size:19px;line-height:1.25;max-width:30ch;font-variation-settings:"SOFT" 100}
+.slot .ph span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.slot figcaption{position:absolute;left:12px;bottom:12px;background:var(--card);font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:4px 8px;border-radius:3px}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:end;padding-block:72px 56px}
+.hero .copy{min-width:0;padding-bottom:12px}
+.hero h1{font-size:clamp(46px,6.6vw,92px);line-height:1;margin:20px 0 0}
+.hero h1 em{font-style:italic;color:var(--honey)}
+.hero .sub{font-size:clamp(18px,1.7vw,21px);margin:24px 0 0;max-width:32ch}
+.hero .intro{color:var(--muted);margin:22px 0 0;max-width:46ch;font-size:15.5px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.btn{font-family:var(--body);font-size:14px;font-weight:500;text-decoration:none;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn:hover{border-color:var(--honey)}
+.btn.solid:hover{background:var(--honey);border-color:var(--honey)}
+.hero .slot{aspect-ratio:4/5}
+
+/* ---------- signals ---------- */
+.signals{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sig{padding:26px 22px 28px 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.sig + .sig{padding-left:22px;border-left:1px solid var(--line)}
+.sig b{font-family:var(--display);font-weight:300;font-size:clamp(34px,3.6vw,48px);line-height:1;font-variant-numeric:tabular-nums;font-variation-settings:"SOFT" 100}
+.sig span{font-size:14px;color:var(--muted);max-width:24ch;line-height:1.45}
+
+/* ---------- chapters ---------- */
+.chapter{padding-block:96px 24px}
+.ch-head{display:grid;grid-template-columns:auto 1fr;gap:12px 40px;align-items:end;margin-bottom:44px}
+.ch-head h2{font-size:clamp(64px,10vw,140px);line-height:.85;font-style:italic;font-weight:300}
+.ch-head h2 small{font-style:normal;font-size:.18em;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:14px}
+.ch-head p{margin:0;color:var(--muted);max-width:44ch;padding-bottom:8px}
+
+.case{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+.case.flip{grid-template-columns:1fr 1.1fr}
+.case.flip .media{order:2}
+.case .media{display:flex;flex-direction:column;gap:12px;min-width:0}
+.case .body{display:flex;flex-direction:column;gap:20px;min-width:0}
+.case h3{font-size:clamp(28px,3vw,40px);line-height:1.1}
+.case .lede{margin:0;font-size:17px;max-width:44ch}
+.meta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+/* the translation card: the site's signature device */
+.tr{border:1px solid var(--line);border-radius:8px;background:var(--card);overflow:hidden}
+.tr div{display:grid;grid-template-columns:86px 1fr;gap:14px;padding:14px 16px;align-items:baseline}
+.tr div + div{border-top:1px dashed var(--line)}
+.tr dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.tr dd{margin:0;font-size:15px}
+.tr .tech dd{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.tr .human dt{color:var(--honey)}
+.tr .human dd{font-family:var(--display);font-size:19px;line-height:1.35;font-variation-settings:"SOFT" 100}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.stats div{padding:16px 16px 0 0;min-width:0}
+.stats div + div{padding-left:16px;border-left:1px solid var(--line)}
+.stats b{display:block;font-family:var(--display);font-weight:350;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums;font-variation-settings:"SOFT" 100}
+.stats span{font-size:13px;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+
+details.more summary{cursor:pointer;list-style:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:2px}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"+";font-family:var(--mono)}
+details.more[open] summary::after{content:"−"}
+details.more ul{margin:14px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14.5px;color:var(--muted)}
+
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.pair > article{display:flex;flex-direction:column;gap:18px;min-width:0}
+
+/* fire chart */
+.chart{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:12px}
+.chart .row{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}
+.chart .row > span{font-size:13px;color:var(--muted)}
+.bars{display:grid;gap:4px}
+.bar{height:13px;border-radius:2px;position:relative;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:2px;background:color-mix(in srgb,var(--ink) 28%,transparent)}
+.bar.after i{background:var(--honey)}
+.bar em{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-style:normal;font-family:var(--mono);font-size:10.5px;font-variant-numeric:tabular-nums}
+.key{display:flex;gap:16px;font-size:12px;color:var(--muted)}
+.key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:color-mix(in srgb,var(--ink) 28%,transparent)}
+.key i.a{background:var(--honey)}
+
+/* platform diagram */
+.diagram{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+.diagram svg{display:block;width:100%;min-width:420px;height:auto}
+.diagram .n rect{fill:var(--paper);stroke:var(--line)}
+.diagram .n text{fill:var(--ink);font-family:var(--body);font-size:13px}
+.diagram .c rect{fill:var(--ink)}
+.diagram .c text{fill:var(--paper);font-family:var(--body);font-size:14px;font-weight:600}
+.diagram .c .s{font-family:var(--mono);font-size:11px;font-weight:400;fill:var(--paper);opacity:.75}
+.diagram line{stroke:var(--honey);stroke-width:1.2}
+.diagram .lbl{fill:var(--muted);font-family:var(--mono);font-size:10.5px;letter-spacing:.05em}
+
+/* building now: archive grid, title over preview */
+.arch{padding-block:96px 24px}
+.arch-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.arch-head h2{font-size:clamp(36px,4.4vw,56px);line-height:1;font-style:italic;font-weight:300;margin-top:10px}
+.arch-head p{margin:0;color:var(--muted);max-width:40ch;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{aspect-ratio:4/5;display:block;text-decoration:none;color:inherit}
+.card.wide{grid-column:span 2;aspect-ratio:auto}
+.card .ph{justify-content:flex-start;padding-top:46px;transition:transform .5s ease}
+.card .ph b{font-size:15px;opacity:.75}
+.card img{transition:transform .5s ease}
+.card:hover .ph,.card:hover img{transform:scale(1.03)}
+.card .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px;
+  background:linear-gradient(to top,rgba(24,19,15,.82) 0%,rgba(24,19,15,.35) 38%,rgba(24,19,15,0) 62%);color:#FBF6EE}
+.card .tag{align-self:flex-start;background:rgba(251,246,238,.92);color:#26211D;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+.card h4{font-size:clamp(22px,2.1vw,30px);line-height:1.12;color:#FBF6EE;max-width:22ch}
+.card.wide h4{font-size:clamp(26px,2.8vw,40px)}
+.card .m{display:block;margin-top:8px;font-size:13px;color:rgba(251,246,238,.78)}
+.card:hover h4{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+@media (max-width:960px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .card.wide{aspect-ratio:16/10}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .card.wide{grid-column:auto;aspect-ratio:4/5}
+  .arch{padding-block:72px 16px}
+}
+
+/* eye */
+.eye{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:center;padding-block:96px 40px}
+.eye h2{font-size:clamp(32px,3.6vw,48px);line-height:1.1}
+.eye p{color:var(--muted);margin:16px 0 0;max-width:40ch}
+.eye a{font-family:var(--mono);font-size:12px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.strip .slot{aspect-ratio:3/4}
+.strip .slot .ph b{font-size:15px}
+
+/* timeline */
+.tl{padding-block:72px 24px}
+.tl ol{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--line)}
+.tl li{display:grid;grid-template-columns:130px 1fr 1.4fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tl .yr{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tl .org{font-weight:500}
+.tl .role{color:var(--muted)}
+
+footer{margin-top:64px;background:var(--band)}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;padding-block:64px 128px}
+footer .big{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(34px,4vw,52px);line-height:1;margin:0 0 14px;font-variation-settings:"SOFT" 100}
+footer p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.9}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer a,.copy-inline{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.copy-inline{background:none;border-top:0;border-left:0;border-right:0;padding:0;font:inherit;cursor:pointer}
+footer a:hover,.copy-inline:hover{border-color:var(--honey)}
+
+/* human / machine */
+.mode{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;background:var(--ink);padding:4px;gap:2px;border-radius:999px;box-shadow:0 10px 30px rgba(38,33,29,.22)}
+.mode button{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:0;border-radius:999px;background:transparent;color:color-mix(in srgb,var(--paper) 60%,transparent);padding:9px 15px;cursor:pointer}
+.mode button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+#machine{padding-block:40px 140px}
+#machine .mhead{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+#machine pre{margin:0;padding:24px 0;font-family:var(--mono);font-size:13px;line-height:1.75;white-space:pre-wrap;word-break:break-word;max-width:86ch}
+.toast{position:fixed;left:50%;bottom:calc(78px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--honey);color:#fff;font-size:13px;padding:8px 14px;border-radius:999px;z-index:40}
+
+/* responsive */
+@media (max-width:960px){
+  .nav{display:none}
+  .hero{grid-template-columns:1fr;gap:32px;padding-block:48px 40px}
+  .hero .slot{aspect-ratio:4/3}
+  .signals{grid-template-columns:repeat(2,1fr)}
+  .sig:nth-child(3){padding-left:0;border-left:0}
+  .sig:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .ch-head{grid-template-columns:1fr}
+  .case,.case.flip,.pair,.owol,.eye{grid-template-columns:1fr;gap:28px}
+  .case.flip .media{order:0}
+  .build{grid-template-columns:repeat(2,1fr)}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  .tl li{grid-template-columns:1fr;gap:2px}
+  footer .wrap{grid-template-columns:1fr}
+  .chapter{padding-block:72px 16px}
+}
+@media (max-width:560px){
+  .status .long{display:none}
+  .signals{grid-template-columns:1fr}
+  .sig,.sig + .sig{padding-left:0;border-left:0;border-bottom:1px solid var(--line)}
+  .sig:last-child{border-bottom:0}
+  .stats{grid-template-columns:1fr}
+  .stats div + div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:12px}
+  .tr div{grid-template-columns:1fr;gap:4px}
+  .chart .row{grid-template-columns:1fr;gap:4px}
+  .steps{grid-template-columns:1fr}
+  .build{grid-template-columns:1fr}
+  .owol{padding:22px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">June Lim</a>
+    <nav class="nav" aria-label="Sections"><a href="#use">Use</a><a href="#trust">Trust</a><a href="#translate">Translate</a><a href="#now">Building now</a><a href="#contact">Contact</a></nav>
+    <div class="status"><i></i><span class="long">Open to Summer 2027 ·&nbsp;</span><span>Berkeley <span id="clock">PT</span></span></div>
+  </div>
+</header>
+
+<div id="human">
+<main class="wrap" id="top">
+
+  <section class="hero" aria-labelledby="h">
+    <div class="copy">
+      <span class="eyebrow">AI product · Berkeley Haas MBA '28</span>
+      <h1 id="h">Technology, <em>translated</em> for humans.</h1>
+      <p class="sub">I build AI products people <span class="hl">trust</span> and <span class="hl">actually use</span>.</p>
+      <p class="intro">Six years at SK Telecom taking AI from model to everyday habit, for 10 million people on their phones and for every team inside Korea's largest telecom.</p>
+      <div class="cta">
+        <a class="btn solid" href="#use">See the work</a>
+        <button class="btn" type="button" data-copy="junelim@berkeley.edu">Copy email</button>
+        <a class="btn" href="https://www.linkedin.com/in/jeeyoon-june-lim/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <figure class="slot">
+      <img src="photos/theater.jpg" alt="June Lim seated in an empty theater, smiling">
+    </figure>
+  </section>
+
+  <div class="signals">
+    <div class="sig"><b>10M+</b><span>monthly users on the AI call agent I built from zero</span></div>
+    <div class="sig"><b>85.8%</b><span>emergency callbacks connected for Incheon firefighters, up from 74.7%</span></div>
+    <div class="sig"><b>4M+</b><span>daily requests on SKT's AI platform in its first year</span></div>
+    <div class="sig"><b>75%</b><span>below the initial ask on SKT's exclusive OpenAI partnership</span></div>
+  </div>
+
+  <!-- ================= USE ================= -->
+  <section class="chapter" id="use" aria-labelledby="use-h">
+    <div class="ch-head">
+      <h2 id="use-h"><small>Chapter one</small>Use.</h2>
+      <p>People adopt technology when it fits a life they already have. I start by finding who is being left out.</p>
+    </div>
+    <div class="case">
+      <div class="media">
+        <figure class="slot" style="aspect-ratio:16/10">
+          <img src="photos/call.jpg" alt="June on a phone call at a cafe table by the window" style="object-position:50% 40%">
+        </figure>
+        <figure class="slot" style="aspect-ratio:16/10">
+          <img src="photos/phone.jpg" alt="A.Phone Call Summary screen listing today's calls with one-line summaries">
+          <figcaption>A.Phone · Call Summary</figcaption>
+        </figure>
+      </div>
+      <div class="body">
+        <span class="meta">A.Phone · SK Telecom · AI Product Manager · 2021-2024</span>
+        <h3>The AI call agent built for the users we were missing</h3>
+        <p class="lede">User data showed our call app was 70% Android, so iPhone users in their 20s were locked out of every AI feature. I built the industry's first iPhone call recording to bring them in.</p>
+        <dl class="tr">
+          <div class="tech"><dt>In tech</dt><dd>mVoIP-based iOS call recording within Apple's guidelines</dd></div>
+          <div class="human"><dt>For humans</dt><dd>iPhone users can finally get AI call summaries too.</dd></div>
+        </dl>
+        <div class="stats">
+          <div><b>0 → 10M+</b><span>MAU, from launch to Feb 2026</span></div>
+          <div><b>7M vs 2M</b><span>iOS users vs. the legacy app</span></div>
+          <div><b>Top 3</b><span>company-wide achievement, 2024</span></div>
+        </div>
+        <details class="more"><summary>How it was built</summary>
+          <ul><li>0 to 1 in 4 months across ML engineering, UX, and compliance</li><li>Squad of 12, 24 call features including in-call search</li><li>100K sign-ups on launch day, 1M MAU in 6 months</li><li>Grew SKT's call app user pool from 10M to 14.5M</li></ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRUST ================= -->
+  <section class="chapter" id="trust" aria-labelledby="trust-h">
+    <div class="ch-head">
+      <h2 id="trust-h"><small>Chapter two</small>Trust.</h2>
+      <p>A feature only works if people believe it. Some of my most important work was about the moment someone decides whether to rely on the technology.</p>
+    </div>
+    <div class="pair">
+      <article>
+        <figure class="slot" style="aspect-ratio:16/10">
+          <div class="ph"><span>Photo · Incheon Fire Department</span><b>Firefighters at the station, the partnership meeting, or the caller-ID screen on a citizen's phone.</b></div>
+        </figure>
+        <span class="meta">Incheon Fire Department × SK Telecom</span>
+        <h3>Why people stopped answering firefighters</h3>
+        <p class="lede">Callbacks from firefighters' personal numbers were flagged as spam, so people let them ring. We redesigned call routing and added caller ID for first responders.</p>
+        <dl class="tr">
+          <div class="tech"><dt>In tech</dt><dd>Spam-filter false positives on first-responder numbers</dd></div>
+          <div class="human"><dt>For humans</dt><dd>You pick up when a firefighter calls back.</dd></div>
+        </dl>
+        <div class="chart" role="img" aria-label="Before and after: emergency call success 74.7% to 85.8%, immediate connection 64.9% to 71.9%, missed-call callbacks 27.9% to 49.5%">
+          <div class="key"><span><i></i>Before</span><span><i class="a"></i>After</span></div>
+          <div class="row"><span>Emergency call success</span><div class="bars"><div class="bar"><i style="width:74.7%"></i><em>74.7%</em></div><div class="bar after"><i style="width:85.8%"></i><em>85.8%</em></div></div></div>
+          <div class="row"><span>Immediate connection</span><div class="bars"><div class="bar"><i style="width:64.9%"></i><em>64.9%</em></div><div class="bar after"><i style="width:71.9%"></i><em>71.9%</em></div></div></div>
+          <div class="row"><span>Missed-call callbacks</span><div class="bars"><div class="bar"><i style="width:27.9%"></i><em>27.9%</em></div><div class="bar after"><i style="width:49.5%"></i><em>49.5%</em></div></div></div>
+        </div>
+      </article>
+      <article>
+        <figure class="slot" style="aspect-ratio:16/10">
+          <img src="photos/meeting.jpg" alt="June laughing with teammates in a meeting room, product specs on the screen" style="object-position:60% 50%">
+        </figure>
+        <span class="meta">A.Phone · AI safety at launch</span>
+        <h3>Shipping AI people can rely on</h3>
+        <p class="lede">Before launch, I aligned engineering and legal on hallucination criteria and worked with ML engineers to make privacy masking precise enough to trust.</p>
+        <dl class="tr">
+          <div class="tech"><dt>In tech</dt><dd>Hallucination launch criteria and LLM-based privacy masking</dd></div>
+          <div class="human"><dt>For humans</dt><dd>Your summary is accurate, and your account number stays private.</dd></div>
+        </dl>
+        <div class="stats">
+          <div><b>−36%</b><span>false positives in privacy masking</span></div>
+          <div><b>20+</b><span>financial institutions' number patterns in training data</span></div>
+          <div><b>On time</b><span>launch, with engineering and legal aligned</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= TRANSLATE ================= -->
+  <section class="chapter" id="translate" aria-labelledby="tr-h">
+    <div class="ch-head">
+      <h2 id="tr-h"><small>Chapter three</small>Translate.</h2>
+      <p>Frontier AI arrives as APIs and benchmarks. I turn it into products teams can build on and a story leaders can act on.</p>
+    </div>
+    <div class="case">
+      <div class="media">
+        <div class="diagram" role="img" aria-label="SKT LLM Gateway connecting OpenAI, Anthropic, AWS, Adobe, and Together AI to SK affiliates">
+          <svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg">
+            <text class="lbl" x="20" y="28">FRONTIER PARTNERS</text>
+            <line x1="76" y1="74" x2="280" y2="178"/><line x1="188" y1="74" x2="280" y2="178"/><line x1="280" y1="74" x2="280" y2="178"/><line x1="372" y1="74" x2="280" y2="178"/><line x1="484" y1="74" x2="280" y2="178"/>
+            <g class="n"><rect x="22" y="48" width="108" height="34" rx="17"/><text x="76" y="70" text-anchor="middle">OpenAI</text></g>
+            <g class="n"><rect x="134" y="48" width="108" height="34" rx="17"/><text x="188" y="70" text-anchor="middle">Anthropic</text></g>
+            <g class="n"><rect x="246" y="48" width="68" height="34" rx="17"/><text x="280" y="70" text-anchor="middle">AWS</text></g>
+            <g class="n"><rect x="318" y="48" width="108" height="34" rx="17"/><text x="372" y="70" text-anchor="middle">Adobe</text></g>
+            <g class="n"><rect x="430" y="48" width="108" height="34" rx="17"/><text x="484" y="70" text-anchor="middle">Together AI</text></g>
+            <g class="c"><rect x="170" y="150" width="220" height="62" rx="10"/><text x="280" y="177" text-anchor="middle">SKT LLM Gateway</text><text class="s" x="280" y="198" text-anchor="middle">4M+ requests / day</text></g>
+            <line x1="280" y1="212" x2="120" y2="290"/><line x1="280" y1="212" x2="280" y2="290"/><line x1="280" y1="212" x2="440" y2="290"/>
+            <g class="n"><rect x="56" y="288" width="128" height="34" rx="17"/><text x="120" y="310" text-anchor="middle">SK affiliates</text></g>
+            <g class="n"><rect x="216" y="288" width="128" height="34" rx="17"/><text x="280" y="310" text-anchor="middle">Enterprise teams</text></g>
+            <g class="n"><rect x="376" y="288" width="128" height="34" rx="17"/><text x="440" y="310" text-anchor="middle">2,600 stores</text></g>
+            <text class="lbl" x="20" y="350">WHERE IT GETS USED</text>
+          </svg>
+        </div>
+      </div>
+      <div class="body">
+        <span class="meta">SK Telecom · AI Platform GTM &amp; Global Partnerships · 2024-2025</span>
+        <h3>Bringing frontier labs into Korea's largest telecom</h3>
+        <p class="lede">I set the go-to-market for SKT's LLM Gateway and brought in the partners that made teams want to build on it.</p>
+        <dl class="tr">
+          <div class="tech"><dt>In tech</dt><dd>Multi-vendor LLM gateway with open-source model serving</dd></div>
+          <div class="human"><dt>For humans</dt><dd>Any team at SK can use the best model for the job, safely and affordably.</dd></div>
+        </dl>
+        <div class="stats">
+          <div><b>4M+</b><span>daily requests in year one</span></div>
+          <div><b>75% below</b><span>initial ask on the OpenAI B2C deal</span></div>
+          <div><b>−30%</b><span>LLM serving cost after Together AI</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="case flip" style="margin-top:72px">
+      <div class="media">
+        <figure class="slot" style="aspect-ratio:16/9">
+          <div class="ph"><span>Photo · On stage</span><b>Wide shot of the CES 2025 or MWC keynote stage, with the audience in frame.</b></div>
+        </figure>
+      </div>
+      <div class="body">
+        <span class="meta">CES 2025 · MWC · DTW Ignite · AWS Summit Seoul</span>
+        <h3>One story for an entire AI strategy</h3>
+        <p class="lede">SKT had an AI data center business, a platform, and consumer services. I wrote the AI-first narrative that tied them into one keynote story for C-level stages.</p>
+        <dl class="tr">
+          <div class="tech"><dt>In tech</dt><dd>AI infrastructure, platform, and service roadmaps</dd></div>
+          <div class="human"><dt>For humans</dt><dd>Here is why SKT is an AI company, in one story.</dd></div>
+        </dl>
+        <div class="stats">
+          <div><b>26,000+</b><span>global executives reached</span></div>
+          <div><b>4</b><span>global stages</span></div>
+          <div><b>C-level</b><span>keynotes</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BUILDING NOW ================= -->
+  <section class="arch" id="now" aria-labelledby="now-h">
+    <div class="arch-head">
+      <div><span class="eyebrow">Archive</span><h2 id="now-h">Building now.</h2></div>
+      <p>A startup I stopped on purpose, and the side projects I keep making.</p>
+    </div>
+    <div class="grid">
+      <article class="slot card wide">
+        <div class="ph"><span>Preview · OWOL Archive</span><b>Owner at work, or the agent replying inside a messenger chat</b></div>
+        <div class="ov"><span class="tag">Startup</span><div><h4>I built an AI booking agent. Then I shut it down.</h4><span class="m">OWOL Archive · 20+ owner interviews, one pivot, one hard stop</span></div></div>
+      </article>
+      <article class="slot card">
+        <div class="ph"><span>Preview</span><b>Saju screenshot</b></div>
+        <div class="ov"><span class="tag">Side project</span><div><h4>Saju</h4><span class="m">Hook line to come</span></div></div>
+      </article>
+      <article class="slot card">
+        <div class="ph"><span>Preview</span><b>GTM screenshot</b></div>
+        <div class="ov"><span class="tag">Side project</span><div><h4>GTM</h4><span class="m">Hook line to come</span></div></div>
+      </article>
+      <article class="slot card">
+        <div class="ph"><span>Preview</span><b>Character chat screenshot</b></div>
+        <div class="ov"><span class="tag">Side project</span><div><h4>Character chat</h4><span class="m">Hook line to come</span></div></div>
+      </article>
+      <article class="slot card">
+        <div class="ph"><span>Preview</span><b>Voice AI still or clip</b></div>
+        <div class="ov"><span class="tag">Side project</span><div><h4>Voice AI content automation</h4><span class="m">Hook line to come</span></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= HOW I SEE PEOPLE ================= -->
+  <section class="eye" aria-labelledby="eye-h">
+    <div>
+      <span class="eyebrow">Behind the camera</span>
+      <h2 id="eye-h" style="margin-top:12px">I've photographed 100+ people.</h2>
+      <p>Portraits and product work ask for the same thing: paying attention to people until you see what they need.</p>
+      <p><a href="https://www.instagram.com/owol_snap/" target="_blank" rel="noopener">@owol_snap ↗</a></p>
+    </div>
+    <div class="strip">
+      <figure class="slot"><div class="ph"><span>Your photo</span><b>Portrait</b></div></figure>
+      <figure class="slot"><div class="ph"><span>Your photo</span><b>Portrait</b></div></figure>
+      <figure class="slot"><div class="ph"><span>Your photo</span><b>Street or place</b></div></figure>
+      <figure class="slot"><div class="ph"><span>Your photo</span><b>Portrait</b></div></figure>
+    </div>
+  </section>
+
+  <section class="tl" aria-labelledby="tl-h">
+    <span class="eyebrow" id="tl-h">Path</span>
+    <ol>
+      <li><span class="yr">2026-2028</span><span class="org">UC Berkeley, Haas</span><span class="role">MBA, AI for Business Certificate</span></li>
+      <li><span class="yr">2025-2026</span><span class="org">OWOL Archive</span><span class="role">Founder</span></li>
+      <li><span class="yr">2024-2025</span><span class="org">SK Telecom</span><span class="role">AI Platform GTM &amp; Global Partnership Manager</span></li>
+      <li><span class="yr">2021-2024</span><span class="org">SK Telecom</span><span class="role">AI Product Manager</span></li>
+      <li><span class="yr">2019-2021</span><span class="org">SK Telecom · SK Inc.</span><span class="role">Communications and strategy</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <p class="big">Let's talk.</p>
+      <p>Looking for Summer 2027 roles in AI product and AI go-to-market.</p>
+    </div>
+    <div class="col">
+      <span class="eyebrow">Contact</span>
+      <p><button class="copy-inline" type="button" data-copy="junelim@berkeley.edu">junelim@berkeley.edu</button><br>
+      <a href="https://www.linkedin.com/in/jeeyoon-june-lim/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/junelim12" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+    <div class="col">
+      <span class="eyebrow">Colophon</span>
+      <p>© 2026 June Lim<br>Berkeley, California</p>
+    </div>
+  </div>
+</footer>
+</div>
+
+<div id="machine" hidden>
+  <div class="wrap">
+    <div class="mhead"><span class="eyebrow">profile.md · for agents and recruiting tools</span><button class="btn" type="button" id="copyMd">Copy</button></div>
+<pre id="md"># June Lim
+
+Technology, translated for humans.
+I build AI products people trust and actually use.
+
+- Email: junelim@berkeley.edu
+- LinkedIn: https://www.linkedin.com/in/jeeyoon-june-lim/
+- GitHub: https://github.com/junelim12
+- Location: Berkeley, CA
+- Seeking: Summer 2027 roles in AI product and AI go-to-market
+
+## Use
+### A.Phone, SK Telecom (AI Product Manager, 2021-2024)
+- Found in user data that a 70% Android base locked out iPhone users in their 20s
+- Built the industry's first iPhone call recording (mVoIP, within Apple's guidelines)
+- 0 to 1 in 4 months; 1M MAU in 6 months; 10M+ MAU by Feb 2026
+- 7M iOS users vs. 2M on the legacy app; call app pool grew from 10M to 14.5M
+- Top 3 company-wide achievement, 2024
+
+## Trust
+### Incheon Fire Department
+- Fixed spam filtering that hid firefighters' callbacks; added caller ID for first responders
+- Emergency call success 74.7% to 85.8%; missed-call callbacks 27.9% to 49.5%
+### AI safety at launch
+- Hallucination launch criteria agreed by engineering and legal
+- Privacy masking false positives cut 36%
+
+## Translate
+### SKT AI Platform (GTM & Global Partnerships, 2024-2025)
+- LLM Gateway grown to 4M+ daily requests in year one
+- Integrated OpenAI, Anthropic, AWS, and Adobe
+- Exclusive OpenAI B2C partnership at 75% below the initial ask
+- Together AI investment; LLM serving costs cut 30%
+### Keynote narrative
+- AI-first story for C-level keynotes at CES 2025, MWC, DTW Ignite, and AWS Summit Seoul (26,000+ executives)
+
+## Building now
+- OWOL Archive, Founder (2025-2026): AI booking and translation agent; 20+ owner interviews; pivoted into existing messengers; halted after weighing costs against willingness to pay
+- Side projects: Saju, GTM, Character chat, Voice AI content automation
+
+## Education
+- UC Berkeley Haas, MBA (expected 2028), AI for Business Certificate
+- Sogang University, BA, Cum Laude (2019)</pre>
+  </div>
+</div>
+
+<div class="mode" role="group" aria-label="View mode">
+  <button type="button" id="mHuman" aria-pressed="true">Human</button>
+  <button type="button" id="mMachine" aria-pressed="false">Machine</button>
+</div>
+<div class="toast" id="toast" hidden>Copied</div>
+
+<script>
+(function(){
+  const clock=document.getElementById('clock');
+  const fmt=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',hour:'numeric',minute:'2-digit'});
+  const tick=()=>{clock.textContent=fmt.format(new Date())+' PT'};
+  tick();setInterval(tick,15000);
+
+  const toast=document.getElementById('toast');let tt;
+  const show=m=>{toast.textContent=m;toast.hidden=false;clearTimeout(tt);tt=setTimeout(()=>toast.hidden=true,1600)};
+  document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>{
+    navigator.clipboard.writeText(b.dataset.copy).then(()=>show('Email copied')).catch(()=>show(b.dataset.copy));
+  }));
+  document.getElementById('copyMd').addEventListener('click',()=>{
+    const el=document.getElementById('md');
+    navigator.clipboard.writeText(el.textContent).then(()=>show('Profile copied')).catch(()=>{
+      const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);show('Selected, press copy');
+    });
+  });
+
+  const human=document.getElementById('human'),machine=document.getElementById('machine');
+  const bh=document.getElementById('mHuman'),bm=document.getElementById('mMachine');
+  function setMode(m){
+    const isM=m==='machine';
+    human.hidden=isM;machine.hidden=!isM;
+    bh.setAttribute('aria-pressed',String(!isM));bm.setAttribute('aria-pressed',String(isM));
+  }
+  bh.addEventListener('click',()=>setMode('human'));
+  bm.addEventListener('click',()=>{setMode('machine');scrollTo(0,0)});
+  if(location.hash==='#machine') setMode('machine');
+})();
+</script>
+</body>
+</html>
