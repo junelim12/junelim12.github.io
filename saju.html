@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Master Yun · June Lim</title>
+<meta name="description" content="How I built Master Yun at an AWS Loft hackathon: a voice-guided Korean saju reader that blends the Four Pillars with Western astrology, built with Lovable and ElevenLabs.">
+<meta property="og:title" content="Master Yun · A hackathon build by June Lim">
+<meta property="og:description" content="A Korean saju reader you can talk to, blended with the astrology Americans already know.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://junelim12.github.io/saju.html">
+<meta property="og:image" content="https://junelim12.github.io/photos/saju-stage.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111111'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-weight='800' font-size='34' text-anchor='middle' fill='%23EEEDEA'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,400..800&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Same system as the main site. A short build story: wide photos, one narrow text column, a three-step build diagram. */
+:root{
+  --paper:#EEEDEA;--card:#F8F7F4;--band:#E2E0DB;--ink:#111111;--muted:#5E5D59;
+  --line:rgba(17,17,17,.16);--accent:#23307A;--accent-soft:#D5D9EE;--night:#14112A;--night-ink:#EEEDEA;--gold:#D9B25F;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Archivo",-apple-system,"Segoe UI",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{--paper:#121212;--card:#1A1A1A;--band:#222222;--ink:#EEEDEA;--muted:#9C9A95;
+    --line:rgba(238,237,234,.14);--accent:#93A0F0;--accent-soft:#262C52;--night:#1C1838;color-scheme:dark}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--display);font-weight:750;letter-spacing:-.025em;text-wrap:balance;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:58px;gap:16px}
+.top a{text-decoration:none;font-size:14px;color:var(--muted)}
+.top a:hover{color:var(--ink)}
+.mark{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:20px;color:var(--ink)!important}
+
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:end;padding-block:64px 40px}
+.hero h1{font-size:clamp(56px,8.6vw,108px);line-height:.92;margin-top:16px;font-stretch:80%;letter-spacing:-.04em}
+.hero .dek{font-size:clamp(20px,2.1vw,26px);line-height:1.35;margin:20px 0 0;max-width:30ch;font-weight:500}
+.shot{border-radius:2px;overflow:hidden;background:var(--night);aspect-ratio:4/5}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:8px}
+.facts div{padding:16px 16px 16px 0;min-width:0}
+.facts div + div{padding-left:16px;border-left:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:4px 0 0;font-size:15px;font-weight:500;overflow-wrap:anywhere}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.btn{font-size:14px;font-weight:500;text-decoration:none;padding:10px 18px;border-radius:2px;border:1px solid var(--line);background:var(--card);display:inline-flex;gap:8px}
+.btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn:hover{border-color:var(--accent)}
+
+section.ch{padding-block:88px 0}
+.ch-num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em}
+.ch h2{font-size:clamp(32px,4vw,48px);line-height:1.08;margin:10px 0 20px;font-stretch:85%}
+.ch p{margin:0 0 16px}
+
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.why div{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.why b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.why h4{font-size:21px;line-height:1.2}
+.why span{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+.tr{border:1px solid var(--line);border-radius:2px;background:var(--card);overflow:hidden;margin-top:28px}
+.tr div{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:14px 18px;align-items:baseline}
+.tr div + div{border-top:1px dashed var(--line)}
+.tr dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tr dd{margin:0}
+.tr .tech dd{font-family:var(--mono);font-size:13.5px;color:var(--muted)}
+.tr .human dt{color:var(--accent)}
+.tr .human dd{font-size:20px;line-height:1.35;font-weight:600}
+
+.build{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:32px;border:1px solid var(--line);border-radius:2px;background:var(--card)}
+.build > div{padding:22px;display:flex;flex-direction:column;gap:8px;min-width:0;position:relative}
+.build > div + div{border-left:1px solid var(--line)}
+.build b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.build h4{font-size:24px;line-height:1.15}
+.build p{font-size:15px;color:var(--muted);margin:0;line-height:1.55}
+.build .when{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:var(--band);color:var(--ink)}
+.build .when.live{background:var(--accent);color:#fff}
+.output{background:var(--night);color:var(--night-ink);border-radius:2px;padding:18px 22px;margin-top:10px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.output span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.output p{margin:0;font-size:17px;font-weight:600}
+
+.demo{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;margin-top:32px}
+.demo .shot{aspect-ratio:auto}
+.demo .shot img{height:auto}
+.line{font-size:clamp(24px,2.6vw,32px);line-height:1.25;font-weight:600;border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:0 0 20px}
+.demo ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:15.5px}
+
+.stage{margin-top:32px}
+.stage img{width:100%;border-radius:2px}
+.stage figcaption{font-size:13px;color:var(--muted);margin-top:10px}
+
+.next{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--band);border-radius:2px;padding:22px 26px;margin:88px 0 96px}
+.next p{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+
+@media (max-width:860px){
+  .hero,.demo{grid-template-columns:1fr;gap:28px}
+  .hero .shot{aspect-ratio:4/3}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .facts div:nth-child(3){padding-left:0;border-left:0}
+  .facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .why{grid-template-columns:1fr}
+  .build{grid-template-columns:1fr}
+  .build > div + div{border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width:520px){
+  .tr div{grid-template-columns:1fr;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="./">June Lim</a>
+    <a href="./#now">← Back to Building now</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Side project · Hackathon at AWS Loft · 2026</span>
+      <h1>Master Yun</h1>
+      <p class="dek">A Korean saju reader you can talk to, blended with the astrology Americans already know.</p>
+      <div class="cta">
+        <a class="btn solid" href="https://karma-key-generator.lovable.app" target="_blank" rel="noopener">Talk to Master Yun ↗</a>
+        <a class="btn" href="#why">Read the story</a>
+      </div>
+    </div>
+    <div class="shot"><img src="photos/saju-app.jpg" alt="Master Yun, a pink-haired 3D fortune teller in a green robe, greeting the user under a starry sky and asking for their name"></div>
+  </section>
+
+  <dl class="facts">
+    <div><dt>Format</dt><dd>Hackathon build</dd></div>
+    <div><dt>Where</dt><dd>AWS Loft hackathon</dd></div>
+    <div><dt>Built with</dt><dd>GitHub, Lovable, ElevenLabs</dd></div>
+    <div><dt>Live</dt><dd>karma-key-generator.lovable.app</dd></div>
+  </dl>
+
+  <!-- 01 -->
+  <section class="ch" id="why">
+    <div class="col">
+      <span class="ch-num">01 · Why I built it</span>
+      <h2>Saju, translated for an American audience</h2>
+      <p>Saju reads your future from the Four Pillars of the moment you were born. In Korea, people visit a saju reader the way friends here compare star signs. I wanted to build an agent that does a reading, and the hackathon at AWS Loft gave me the excuse.</p>
+      <p>Saju alone would feel foreign to most people in the room. So I paired it with Western astrology, the version Americans already know, and let a character tell you the result out loud.</p>
+    </div>
+    <div class="why">
+      <div><b>The agent</b><h4>A reader you can talk to</h4><span>Not a form that prints a chart. A character who asks your name and walks you through your reading.</span></div>
+      <div><b>The culture</b><h4>Saju meets astrology</h4><span>The Four Pillars combined with the zodiac, so the reading lands for an American user.</span></div>
+      <div><b>The tech</b><h4>Trying ElevenLabs voice</h4><span>I wanted to see how far a voice could carry a character, so Master Yun speaks every line.</span></div>
+    </div>
+    <dl class="tr col">
+      <div class="tech"><dt>In tech</dt><dd>Four Pillars calculation mapped to Western astrology, voiced through the ElevenLabs API</dd></div>
+      <div class="human"><dt>For humans</dt><dd>A fortune teller who greets you by name and talks you through your stars.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 02 -->
+  <section class="ch" id="how">
+    <div class="col">
+      <span class="ch-num">02 · How I built it</span>
+      <h2>Do the hard logic early, assemble on the day</h2>
+      <p>The part that needed real thinking was how saju and astrology fit together, so I built that mechanism ahead of time on GitHub. At the hackathon I focused on the experience: the character, the conversation and the voice.</p>
+    </div>
+    <div class="build">
+      <div><span class="when">Before</span><b>Step 1 · GitHub</b><h4>The reading engine</h4><p>A mechanism that combines the Four Pillars with Western astrology into one reading.</p></div>
+      <div><span class="when live">At the hackathon</span><b>Step 2 · Lovable</b><h4>The app and Master Yun</h4><p>The web app, the 3D character under a night sky, and the chat that collects your details.</p></div>
+      <div><span class="when live">At the hackathon</span><b>Step 3 · ElevenLabs API</b><h4>The voice</h4><p>Every line Master Yun says is spoken aloud, so the reading feels like a conversation.</p></div>
+    </div>
+    <div class="output"><span>What you get</span><p>A voice-guided reading about love, money, career and destiny</p></div>
+  </section>
+
+  <!-- 03 -->
+  <section class="ch" id="demo">
+    <div class="col">
+      <span class="ch-num">03 · The experience</span>
+      <h2>It starts with a greeting</h2>
+    </div>
+    <div class="demo">
+      <div class="shot"><img src="photos/saju-app.jpg" alt="The Master Yun app: a dialogue box under the character reads, I felt someone crossing the gate tonight, and asks for your name" loading="lazy"></div>
+      <div>
+        <p class="line">“Ahh... there you are. I felt someone crossing the gate tonight. I am Master Yun.”</p>
+        <ul>
+          <li>Master Yun asks what to call you before anything else</li>
+          <li>You share your birth details in the chat</li>
+          <li>Master Yun reads your Four Pillars and answers questions on love, money, career and destiny, out loud</li>
+        </ul>
+        <div class="cta"><a class="btn solid" href="https://karma-key-generator.lovable.app" target="_blank" rel="noopener">Try it yourself ↗</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="ch" id="stage">
+    <div class="col">
+      <span class="ch-num">04 · Demo day</span>
+      <h2>Live at AWS Loft</h2>
+      <p>I demoed Master Yun live to the room, with the character greeting me on the big screen.</p>
+    </div>
+    <figure class="stage">
+      <img src="photos/saju-stage.jpg" alt="June presenting at a podium at AWS Loft while Master Yun appears on the projector screen behind her" loading="lazy">
+      <figcaption>Presenting Master Yun at the AWS Loft hackathon.</figcaption>
+    </figure>
+  </section>
+
+  <div class="next">
+    <p>Want your own reading?</p>
+    <a class="btn solid" href="https://karma-key-generator.lovable.app" target="_blank" rel="noopener">Talk to Master Yun ↗</a>
+  </div>
+
+</main>
+</body>
+</html>

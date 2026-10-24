@@ -37,7 +37,8 @@ I build AI products people trust and actually use.
 ## Building now
 - OWOL Archive, Founder (2025-2026): AI booking and translation agent; 20+ owner interviews; pivoted into existing messengers; halted after weighing costs against willingness to pay
 - Kaybridge (venture, 2026): AI platform routing Bay Area startups to decision owners inside Korean enterprises; one deal done by hand, cold to preferred bidder in ~4 months. Case study: https://junelim12.github.io/kaybridge.html
-- Side projects: Saju, Character chat, Voice AI content automation
+- Master Yun (hackathon, AWS Loft, 2026): voice-guided Korean saju reader that blends the Four Pillars with Western astrology; reading engine built on GitHub, app in Lovable, voice via the ElevenLabs API. Live: https://karma-key-generator.lovable.app · Story: https://junelim12.github.io/saju.html
+- Side projects: Character chat, Voice AI content automation
 
 ## Education
 - UC Berkeley Haas, MBA (expected 2028), AI for Business Certificate
