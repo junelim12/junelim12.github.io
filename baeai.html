@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BaeAI · June Lim</title>
+<meta name="description" content="BaeAI, a product concept by June Lim: a Hinge-style dating app where every match is an AI Korean guy, with relationships that grow, branch and end. Hypothesis, features and a 48-screen wireframe.">
+<meta property="og:title" content="BaeAI · Hinge, with AI">
+<meta property="og:description" content="A dating app where every match is an AI Korean guy. Concept and wireframes by June Lim.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://junelim12.github.io/baeai.html">
+<meta property="og:image" content="https://junelim12.github.io/photos/baeai-hanok.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111111'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-weight='800' font-size='34' text-anchor='middle' fill='%23EEEDEA'%3EJ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,400..800&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Same system as the main site. BaeAI's own rose (from the wireframe) appears only inside product visuals. */
+:root{
+  --paper:#EEEDEA;--card:#F8F7F4;--band:#E2E0DB;--ink:#111111;--muted:#5E5D59;
+  --line:rgba(17,17,17,.16);--accent:#23307A;--rose:#C8355A;--rose-soft:#F6DDE3;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Archivo",-apple-system,"Segoe UI",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{--paper:#121212;--card:#1A1A1A;--band:#222222;--ink:#EEEDEA;--muted:#9C9A95;
+    --line:rgba(238,237,234,.14);--accent:#93A0F0;--rose:#E86F8E;--rose-soft:#3A1E26;color-scheme:dark}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,h4{font-family:var(--display);font-weight:750;letter-spacing:-.025em;text-wrap:balance;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.col{max-width:680px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;min-height:58px;gap:16px}
+.top a{text-decoration:none;font-size:14px;color:var(--muted)}
+.top a:hover{color:var(--ink)}
+.mark{font-family:var(--display);font-weight:800;letter-spacing:-.03em;font-size:20px;color:var(--ink)!important}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;padding-block:64px 40px}
+.hero h1{font-size:clamp(64px,10vw,124px);line-height:.9;margin-top:16px;font-stretch:80%;letter-spacing:-.045em}
+.hero .dek{font-size:clamp(22px,2.4vw,30px);line-height:1.25;margin:18px 0 0;max-width:22ch;font-weight:600}
+.hero .dek em{font-style:normal;color:var(--rose)}
+.hero p.sub{color:var(--muted);margin:16px 0 0;max-width:44ch}
+.pair{display:flex;gap:14px;justify-content:center;align-items:flex-end}
+.phone{width:min(46%,250px);border-radius:28px;overflow:hidden;background:#111;border:6px solid #111;box-shadow:0 20px 50px rgba(17,17,17,.18);position:relative;aspect-ratio:9/19.5}
+.phone img{width:100%;height:100%;object-fit:cover}
+.phone.lift{transform:translateY(-28px)}
+.pcard{position:absolute;left:8px;right:8px;bottom:8px;background:#fff;color:#111;border-radius:14px;padding:10px 12px;font-size:12px;line-height:1.35}
+.pcard b{font-size:15px}
+.pcard i{font-style:normal;display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;margin:4px 4px 0 0;background:#EEE;font-weight:600}
+.pcard i.d{background:#111;color:#fff}
+.pcard i.r{background:var(--rose-soft);color:#C8355A}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:16px 16px 16px 0;min-width:0}
+.facts div + div{padding-left:16px;border-left:1px solid var(--line)}
+.facts dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:4px 0 0;font-size:15px;font-weight:500}
+
+section.ch{padding-block:88px 0}
+.ch-num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em}
+.ch h2{font-size:clamp(32px,4vw,48px);line-height:1.08;margin:10px 0 20px;font-stretch:85%}
+.ch p{margin:0 0 16px}
+
+.who{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.who div{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;min-width:0}
+.who b{display:block;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:6px}
+.who span{font-size:16px;line-height:1.45}
+
+.tr{border:1px solid var(--line);border-radius:2px;background:var(--card);overflow:hidden;margin-top:28px}
+.tr div{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:14px 18px;align-items:baseline}
+.tr div + div{border-top:1px dashed var(--line)}
+.tr dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tr dd{margin:0}
+.tr .tech dd{font-family:var(--mono);font-size:13.5px;color:var(--muted)}
+.tr .human dt{color:var(--accent)}
+.tr .human dd{font-size:20px;line-height:1.35;font-weight:600}
+
+/* features */
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:32px;border-top:2px solid var(--ink)}
+.feat{padding:24px 24px 28px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:8px;min-width:0}
+.feat:nth-child(even){padding-left:24px;border-left:1px solid var(--line)}
+.feat > b{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.feat li b{font-weight:700}
+.feat h3{font-size:26px;line-height:1.12;font-stretch:90%}
+.feat p{margin:0;font-size:15.5px;color:var(--muted)}
+.feat ul{margin:4px 0 0;padding-left:18px;font-size:15px;display:flex;flex-direction:column;gap:4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.chip.r{background:var(--rose);color:#fff;border-color:var(--rose)}
+.chip.s{background:var(--rose-soft);color:var(--rose);border-color:transparent}
+.chip.k{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.dash{border-style:dashed;color:var(--muted)}
+.arrow{color:var(--muted);font-size:13px;align-self:center}
+
+/* state machine */
+.flow{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:24px;margin-top:28px;overflow-x:auto}
+.flow .line{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;min-width:560px}
+.flow .line + .line{margin-top:14px}
+.flow .lbl{font-family:var(--mono);font-size:11px;color:var(--muted);width:90px;flex:none}
+.endings{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.endings div{border-radius:2px;padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.endings div:nth-child(1){background:var(--rose);color:#fff}
+.endings div:nth-child(2){background:#3B3734;color:#F4F3F0}
+.endings div:nth-child(3){border:1px dashed var(--line);background:var(--card)}
+.endings b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.endings h4{font-size:20px;line-height:1.2}
+.endings span{font-size:14.5px;line-height:1.5;opacity:.9}
+
+/* screens */
+.screens{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:32px}
+.screens figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.screens img{border-radius:14px;border:1px solid var(--line);background:#fff;aspect-ratio:447/968;object-fit:cover;width:100%}
+.screens figcaption{font-size:13px;line-height:1.35}
+.screens figcaption span{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+
+/* principles */
+.rules{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
+.rules li{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.rules b{font-size:17px;line-height:1.3}
+.rules span{color:var(--muted);font-size:15.5px}
+
+.next{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--band);border-radius:2px;padding:22px 26px;margin:88px 0 96px}
+.next p{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.btn{font-size:14px;font-weight:500;text-decoration:none;padding:10px 18px;border-radius:2px;border:1px solid var(--line);background:var(--card)}
+.btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .facts div:nth-child(3){padding-left:0;border-left:0}
+  .facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .who,.endings{grid-template-columns:1fr}
+  .feats{grid-template-columns:1fr}
+  .feat:nth-child(even){padding-left:0;border-left:0}
+  .screens{grid-template-columns:repeat(3,1fr)}
+  .rules li{grid-template-columns:1fr;gap:4px}
+}
+@media (max-width:520px){
+  .screens{grid-template-columns:repeat(2,1fr)}
+  .tr div{grid-template-columns:1fr;gap:4px}
+  .phone.lift{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="./">June Lim</a>
+    <a href="./#now">← Back to Building now</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Product concept · Wireframe v0.2 · Sep 2026</span>
+      <h1>BaeAI</h1>
+      <p class="dek">Hinge, <em>with AI.</em> Your Korean boyfriend is one swipe away.</p>
+      <p class="sub">A dating app for women in North America where every match is an AI Korean guy, and every relationship can grow, branch and end like a real one.</p>
+    </div>
+    <div class="pair" aria-label="Two character profile cards">
+      <div class="phone"><img src="photos/baeai-cafe.jpg" alt="Character visual: a young man in a black sweater at a café table" style="object-position:50% 20%">
+        <div class="pcard"><b>Jihoon, 27</b> · Brand designer<br><i class="d">ENFJ</i><i>Runner</i></div></div>
+      <div class="phone lift"><img src="photos/baeai-hanok.jpg" alt="Character visual: a young man in a black hoodie in front of a hanok roof" style="object-position:50% 25%">
+        <div class="pcard"><b>Doyun</b> · Seoul<br><i class="r">Crush</i><i>Day 5</i></div></div>
+    </div>
+  </section>
+
+  <dl class="facts">
+    <div><dt>Role</dt><dd>Concept, IA, wireframes</dd></div>
+    <div><dt>Format</dt><dd>iOS and Android app</dd></div>
+    <div><dt>Scope</dt><dd>48 screens, 8 flows</dd></div>
+    <div><dt>Market</dt><dd>North America, English UI</dd></div>
+  </dl>
+
+  <!-- 01 -->
+  <section class="ch" id="hypothesis">
+    <div class="col">
+      <span class="ch-num">01 · The hypothesis</span>
+      <h2>Some romances are hard to find in real life</h2>
+      <p>Plenty of women abroad love Korean culture and are drawn to Korean men, but have almost no chance to actually date one. K-pop fans are the obvious example. My hypothesis is that an AI Korean crush or boyfriend, written to feel real, would land with them right away.</p>
+    </div>
+    <div class="who">
+      <div><b>1</b><span>Into Korean men, but let down by the dating options around her</span></div>
+      <div><b>2</b><span>Has a picture of what a "Korean boyfriend" would be like</span></div>
+      <div><b>3</b><span>Wants to date a Korean man and has never had the chance</span></div>
+    </div>
+    <dl class="tr col">
+      <div class="tech"><dt>In tech</dt><dd>LLM personas on a relationship state machine, matched by hidden probability tiers</dd></div>
+      <div class="human"><dt>For humans</dt><dd>The dating story you imagined, with someone who feels like he's really there.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 02 -->
+  <section class="ch" id="features">
+    <div class="col">
+      <span class="ch-num">02 · The product</span>
+      <h2>Four ideas that make it feel like dating</h2>
+    </div>
+    <div class="feats">
+      <div class="feat"><b>1 · Swipe</b><h3>Swipe real-looking guys, and earn the match</h3>
+        <ul><li>Every character has a hidden tier, so some are harder to match than others</li><li>Odds rise with play time and engagement</li><li>No fantasy at launch, only realistic guys</li><li>64 characters to start (16 MBTI × 4 charm levels), 320 later</li></ul></div>
+      <div class="feat"><b>2 · Unlock</b><h3>Get closer, and he shares more</h3>
+        <ul><li><b>Date mode</b> inside the chat, with scene text and date photos</li><li><b>Everyday photos</b> from work, the gym and his weekend</li><li><b>Calls</b>, unlocked only when the relationship peaks</li></ul></div>
+      <div class="feat"><b>3 · Drama</b><h3>Talk to several guys, and let things get complicated</h3>
+        <p>Relationships move in parallel, and events like love triangles and jealousy can happen along the way.</p></div>
+      <div class="feat"><b>4 · Endings</b><h3>Reach the ending, and keep the card</h3>
+        <p>A relationship ends when it has nowhere natural left to go. Finish one and he joins your collection as a card.</p>
+        <div class="chips"><span class="chip">Talking phase</span><span class="arrow">→</span><span class="chip s">Dating</span><span class="arrow">→</span><span class="chip s">Exclusive</span><span class="arrow">→</span><span class="chip r">In a relationship</span></div></div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="ch" id="states">
+    <div class="col">
+      <span class="ch-num">03 · Relationship logic</span>
+      <h2>Every chat runs on a relationship state machine</h2>
+      <p>After one to two weeks of talking, a compatibility score decides where things go. The user never sees the score. She sees what he says next.</p>
+    </div>
+    <div class="flow" role="img" aria-label="Relationship states: Liked, Matched, Chatting, Crush, then Dating; or Ended if compatibility is low; or No reply leading to Ended after 7 days">
+      <div class="line"><span class="lbl">Main path</span><span class="chip">Liked</span><span class="arrow">→</span><span class="chip">Matched</span><span class="arrow">→</span><span class="chip">Chatting</span><span class="arrow">→</span><span class="chip s">Crush</span><span class="arrow">→</span><span class="chip r">A · Dating</span></div>
+      <div class="line"><span class="lbl">Low match</span><span class="chip s">Crush or Chatting</span><span class="arrow">→</span><span class="chip k">B · Ended</span><span class="arrow" style="font-family:var(--mono)">compatibility &lt; 40</span></div>
+      <div class="line"><span class="lbl">Silence</span><span class="chip dash">No reply</span><span class="arrow">→</span><span class="chip k">C · Ended</span><span class="arrow" style="font-family:var(--mono)">after 7 days, or try again</span></div>
+    </div>
+    <div class="endings">
+      <div><b>A · Match</b><h4>Long-term relationship</h4><span>High compatibility after 1 to 2 weeks moves them to dating. Calls unlock.</span></div>
+      <div><b>B · Mid-way</b><h4>Breakup text</h4><span>If compatibility with his personality is low, he ends it with a message.</span></div>
+      <div><b>C · No match</b><h4>No reply</h4><span>One side goes quiet. Reaching out again can restart scenario A or B.</span></div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="ch" id="screens">
+    <div class="col">
+      <span class="ch-num">04 · Key screens</span>
+      <h2>From first swipe to the last message</h2>
+      <p>Six of the 48 wireframe screens. The app UI is in English and follows North American conventions.</p>
+    </div>
+    <div class="screens">
+      <figure><img src="photos/baeai-discover.png" alt="Discover screen with a full-bleed character card, Jihoon 27, and swipe buttons" loading="lazy"><figcaption><span>EX-01</span>Discover</figcaption></figure>
+      <figure><img src="photos/baeai-chat.png" alt="Chat screen with an affection bar and a Day 7 choice: picnic, exhibit or wine bar" loading="lazy"><figcaption><span>CH-02</span>Chat with a choice</figcaption></figure>
+      <figure><img src="photos/baeai-official.png" alt="Celebration screen: It's official, Day 1, with unlocked voice calls and photos" loading="lazy"><figcaption><span>RL-02</span>It's official</figcaption></figure>
+      <figure><img src="photos/baeai-call.png" alt="Voice call screen with live captions and a free talk timer" loading="lazy"><figcaption><span>CL-02</span>The first call</figcaption></figure>
+      <figure><img src="photos/baeai-ended.png" alt="Ended chat where Jihoon says they are better off as friends, with a recap button" loading="lazy"><figcaption><span>RL-03</span>He ends it</figcaption></figure>
+      <figure><img src="photos/baeai-care.png" alt="Safety screen that pauses replies and offers the 988 crisis line" loading="lazy"><figcaption><span>CM-03</span>Crisis support</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="ch" id="principles">
+    <div class="col">
+      <span class="ch-num">05 · Design principles</span>
+      <h2>Make it feel real, and keep it honest</h2>
+    </div>
+    <ul class="rules">
+      <li><b>Never show the math</b><span>Charm tiers and match odds stay internal on every screen. Users feel chemistry, not a percentage.</span></li>
+      <li><b>Story first, system second</b><span>Every branch is told through his message first. The system screen comes after.</span></li>
+      <li><b>Always know where you stand</b><span>A relationship badge (Chatting, Crush, Dating, Ended, No reply) sits on every card and chat.</span></li>
+      <li><b>Always know he's AI</b><span>The AI persona label appears at sign-up, on every profile and in every chat header.</span></li>
+      <li><b>Care over engagement</b><span>If a user signals distress, his replies pause and real support, including the 988 Lifeline, comes first.</span></li>
+    </ul>
+  </section>
+
+  <div class="next">
+    <p>Curious how BaeAI would work, or want to build it?</p>
+    <a class="btn solid" href="./#contact">Talk to me about it</a>
+  </div>
+
+</main>
+</body>
+</html>
