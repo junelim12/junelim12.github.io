@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OWOL Archive · June Lim</title>
-<meta name="description" content="OWOL Archive: how a beauty booking platform for tourists in Seoul became a lightweight AI agent inside KakaoTalk and LINE, and why June Lim decided to stop.">
+<meta name="description" content="OWOL Archive: a gap June Lim found behind her own camera, a makeover platform with beauty-tuned interpretation AI, a pivot to a lightweight booking agent, and the decision to stop.">
 <meta property="og:title" content="OWOL Archive · I built an AI booking agent. Then I shut it down.">
-<meta property="og:description" content="From a heavy two-sided platform to an agent inside the messengers owners already use, and the decision to stop.">
+<meta property="og:description" content="Found behind the camera, priced out by willingness to pay, and outrun by free tools. The full story of a startup I stopped on purpose.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://junelim12.github.io/owol.html">
 <meta property="og:image" content="https://junelim12.github.io/photos/snap-bath.jpg">
@@ -16,21 +16,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..800;1,62..125,400..800&family=Space+Mono:wght@400;700&display=swap">
 <style>
-/* Same system as the main site. The story is a before/after: v1 drawn as a wide IA, v2 drawn as one chat thread. */
+/* Same system as the main site. A founder story in seven chapters: origin, insight, v1, the math, v2, the stop. */
 :root{
   --paper:#EEEDEA;--card:#F8F7F4;--band:#E2E0DB;--ink:#111111;--muted:#5E5D59;
-  --line:rgba(17,17,17,.16);--accent:#23307A;--accent-soft:#D5D9EE;--kakao:#FEE500;
+  --line:rgba(17,17,17,.16);--accent:#23307A;--accent-soft:#D5D9EE;--kakao:#FEE500;--warn:#B4442E;
   --display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --body:"Archivo",-apple-system,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
   --mono:"Space Mono",ui-monospace,Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){
   :root{--paper:#121212;--card:#1A1A1A;--band:#222222;--ink:#EEEDEA;--muted:#9C9A95;
-    --line:rgba(238,237,234,.14);--accent:#93A0F0;--accent-soft:#262C52;color-scheme:dark}
+    --line:rgba(238,237,234,.14);--accent:#93A0F0;--accent-soft:#262C52;--warn:#E9826B;color-scheme:dark}
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 h1,h2,h3,h4{font-family:var(--display);font-weight:750;letter-spacing:-.025em;text-wrap:balance;margin:0}
@@ -47,16 +48,9 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:750;letter-spacing:-.025em;te
 .hero{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center;padding-block:64px 40px}
 .hero h1{font-size:clamp(56px,8.6vw,108px);line-height:.92;margin-top:16px;font-stretch:80%;letter-spacing:-.04em}
 .hero .dek{font-size:clamp(20px,2.2vw,27px);line-height:1.3;margin:18px 0 0;max-width:26ch;font-weight:600}
-
-/* chat thread */
-.thread{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;display:flex;flex-direction:column;gap:10px}
-.who{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.b{max-width:86%;padding:10px 14px;border-radius:14px;font-size:15px;line-height:1.45}
-.b.tourist{align-self:flex-start;background:var(--band);border-bottom-left-radius:4px}
-.b.owner{align-self:flex-end;background:var(--kakao);color:#111;border-bottom-right-radius:4px}
-.agent{align-self:center;font-family:var(--mono);font-size:11px;color:var(--accent);display:flex;align-items:center;gap:8px;text-align:center}
-.agent::before,.agent::after{content:"";width:28px;height:1px;background:var(--accent);opacity:.5}
-.r{align-self:flex-end}.l{align-self:flex-start}
+.hero .shot{aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative}
+.hero .shot img{width:100%;height:100%;object-fit:cover}
+.hero .shot span{position:absolute;left:12px;bottom:12px;background:var(--card);font-family:var(--mono);font-size:10.5px;padding:4px 8px;border-radius:2px}
 
 .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .facts div{padding:16px 16px 16px 0;min-width:0}
@@ -69,10 +63,25 @@ section.ch{padding-block:88px 0}
 .ch h2{font-size:clamp(32px,4vw,48px);line-height:1.08;margin:10px 0 20px;font-stretch:85%}
 .ch p{margin:0 0 16px}
 
-.trades{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
-.trades div{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:16px;min-width:0}
-.trades b{display:block;font-size:18px}
-.trades span{font-size:13.5px;color:var(--muted)}
+/* voices */
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.voice{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.voice b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.voice q{font-size:20px;line-height:1.35;font-weight:600;quotes:"“" "”"}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:20px}
+.stats div{padding:16px 16px 0 0;min-width:0}
+.stats div + div{padding-left:16px;border-left:1px solid var(--line)}
+.stats strong{display:block;font-family:var(--display);font-size:clamp(30px,3.4vw,42px);line-height:1;font-stretch:85%}
+.stats span{display:block;font-size:14px;color:var(--muted);margin-top:6px;line-height:1.45}
+
+/* insight */
+.insight{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+.insight div{border-radius:2px;padding:22px;min-width:0}
+.insight div:first-child{background:var(--ink);color:var(--paper)}
+.insight div:last-child{background:var(--card);border:1px solid var(--line)}
+.insight b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.insight h4{font-size:24px;line-height:1.15;margin:8px 0}
+.insight p{margin:0;font-size:15.5px;opacity:.85}
 
 .tr{border:1px solid var(--line);border-radius:2px;background:var(--card);overflow:hidden;margin-top:28px}
 .tr div{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:14px 18px;align-items:baseline}
@@ -83,40 +92,83 @@ section.ch{padding-block:88px 0}
 .tr .human dt{color:var(--accent)}
 .tr .human dd{font-size:20px;line-height:1.35;font-weight:600}
 
-/* v1 IA */
-.v1tag{display:inline-block;align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:3px 8px;background:var(--ink);color:var(--paper);border-radius:2px;margin-bottom:10px}
-.v2tag{background:var(--accent);color:#fff}
-.ia{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:28px}
-.scr{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.scr h4{font-size:17px}
-.scr .ref{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em}
-.scr ul{margin:0;padding-left:16px;font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:3px}
-.scr ul ul{padding-left:12px;color:var(--muted);font-size:12.5px}
-.note{font-size:14px;color:var(--muted);margin-top:12px}
+/* v1 pillars */
+.tag{display:inline-block;align-self:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:3px 8px;background:var(--ink);color:var(--paper);border-radius:2px}
+.tag.v2{background:var(--accent);color:#fff}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:28px;border-top:2px solid var(--ink)}
+.pillars div{padding:20px 20px 24px 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.pillars div + div{padding-left:20px;border-left:1px solid var(--line)}
+.pillars b{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.pillars h4{font-size:22px;line-height:1.15}
+.pillars p{margin:0;font-size:15px;color:var(--muted)}
+.journey{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.journey div{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:16px;min-width:0}
+.journey b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.journey p{margin:6px 0 0;font-size:15px}
+.journey .money{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:11px;color:var(--accent)}
+.ia{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
+.scr{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.scr h4{font-size:16px}
+.scr .ref{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.scr ul{margin:0;padding-left:16px;font-size:13px;line-height:1.5}
+.cap{font-size:14px;color:var(--muted);margin-top:12px}
 
-/* compare */
-.tbl{overflow-x:auto;margin-top:28px}
-table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
-th,td{text-align:left;padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
-td:first-child{color:var(--muted);width:24%}
-td.v2{font-weight:600}
+/* economics */
+.econ{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;margin-top:28px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:22px;min-width:0}
+.panel h4{font-size:18px;margin-bottom:14px}
+.eq{display:grid;grid-template-columns:1fr auto;gap:8px 16px;font-size:15.5px;align-items:baseline}
+.eq span:nth-child(even){font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+.eq .sum{border-top:1px solid var(--line);padding-top:8px;font-weight:700}
+.vs{display:grid;gap:12px;margin-top:6px}
+.vs .r{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;font-size:14px}
+.vs .bar{height:30px;border-radius:2px;display:flex;align-items:center;padding-left:10px;font-family:var(--mono);font-size:12px;color:#fff;white-space:nowrap}
+.vs .take{background:var(--accent);width:calc(59.5 / 75 * 100%)}
+.vs .cost{background:var(--warn);width:100%}
+.plan{width:100%;border-collapse:collapse;font-size:15px;margin-top:4px}
+.plan th,.plan td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}
+.plan th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.plan td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.market{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.market div{flex:1;min-width:140px;border-radius:2px;padding:14px 16px}
+.market div:nth-child(1){background:var(--band)}
+.market div:nth-child(2){background:var(--accent-soft)}
+.market div:nth-child(3){background:var(--accent);color:#fff}
+.market b{font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.market strong{display:block;font-size:24px;line-height:1.1;margin-top:4px}
+.market span{font-size:12.5px;opacity:.85}
+.verdict{margin-top:28px;background:var(--ink);color:var(--paper);border-radius:2px;padding:22px 26px;font-size:20px;line-height:1.4;font-weight:600}
 
-/* v2 flow */
-.flow{display:grid;grid-template-columns:1fr auto 1.1fr auto 1fr;gap:12px;align-items:center;margin-top:28px}
-.node{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;min-width:0}
-.node.core{background:var(--accent);color:#fff;border-color:var(--accent)}
-.node b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px;opacity:.85}
-.node span{font-size:15px;line-height:1.45}
-.arw{font-size:22px;color:var(--muted)}
+/* v2 */
+.thread{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.who{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.b{max-width:86%;padding:10px 14px;border-radius:14px;font-size:15px;line-height:1.45}
+.b.tourist{align-self:flex-start;background:var(--band);border-bottom-left-radius:4px}
+.b.owner{align-self:flex-end;background:var(--kakao);color:#111;border-bottom-right-radius:4px}
+.agent{align-self:center;font-family:var(--mono);font-size:11px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.agent::before,.agent::after{content:"";width:28px;height:1px;background:var(--accent);opacity:.5}
+.r{align-self:flex-end}.l{align-self:flex-start}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;margin-top:28px}
+.tbl{overflow-x:auto}
+table.cmp{width:100%;border-collapse:collapse;font-size:15px;min-width:420px}
+table.cmp th,table.cmp td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.cmp th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+table.cmp td:first-child{color:var(--muted)}
+table.cmp td.v2{font-weight:600}
 
 /* stop */
-.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink);margin-top:28px}
+.reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:2px solid var(--ink);margin-top:28px}
 .reasons div{padding:20px 20px 24px 0;min-width:0}
 .reasons div + div{padding-left:20px;border-left:1px solid var(--line)}
 .reasons b{font-family:var(--mono);font-size:12px;color:var(--accent)}
 .reasons h4{font-size:22px;line-height:1.15;margin:6px 0 8px}
-.reasons p{margin:0;font-size:15px;color:var(--muted)}
+.reasons p{margin:0;font-size:15.5px;color:var(--muted)}
+.paradox{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;margin-top:28px}
+.paradox div{border:1px solid var(--line);background:var(--card);border-radius:2px;padding:20px;min-width:0}
+.paradox b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.paradox h4{font-size:21px;line-height:1.2;margin:6px 0}
+.paradox p{margin:0;font-size:15px;color:var(--warn);font-weight:600}
+.paradox .x{align-self:center;font-family:var(--mono);font-size:13px;color:var(--muted)}
 .quote{font-size:clamp(24px,2.8vw,34px);line-height:1.22;font-weight:650;border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:40px 0 0}
 
 .next{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:var(--band);border-radius:2px;padding:22px 26px;margin:88px 0 96px}
@@ -125,19 +177,23 @@ td.v2{font-weight:600}
 .btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
 @media (max-width:960px){
-  .hero{grid-template-columns:1fr;gap:32px}
-  .ia{grid-template-columns:repeat(2,1fr)}
-  .trades{grid-template-columns:repeat(2,1fr)}
+  .hero,.econ,.split{grid-template-columns:1fr;gap:28px}
+  .hero .shot{aspect-ratio:4/3}
   .facts{grid-template-columns:repeat(2,1fr)}
   .facts div:nth-child(3){padding-left:0;border-left:0}
   .facts div:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .flow{grid-template-columns:1fr}
-  .arw{justify-self:center;transform:rotate(90deg)}
-  .reasons{grid-template-columns:1fr}
-  .reasons div + div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .voices,.insight,.journey,.reasons{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .pillars div + div,.reasons div + div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .ia{grid-template-columns:repeat(2,1fr)}
+  .paradox{grid-template-columns:1fr}
+  .paradox .x{justify-self:center}
 }
 @media (max-width:520px){
-  .ia,.trades{grid-template-columns:1fr}
+  .ia{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .stats div + div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:12px}
+  .vs .r{grid-template-columns:1fr;gap:4px}
   .tr div{grid-template-columns:1fr;gap:4px}
 }
 </style>
@@ -157,116 +213,166 @@ td.v2{font-weight:600}
     <div>
       <span class="eyebrow">Startup · Founder · 2025-2026</span>
       <h1>OWOL Archive</h1>
-      <p class="dek">I started with a booking platform, cut it down to one agent inside KakaoTalk, then decided to stop.</p>
+      <p class="dek">I found the gap behind my own camera. Two versions later, I closed the company on purpose.</p>
     </div>
-    <div class="thread" role="img" aria-label="Example: a tourist asks in English, the agent passes it to the owner in Korean on KakaoTalk, and the owner's Korean reply comes back in English">
-      <span class="who l">Tourist · English</span>
-      <div class="b tourist">Hi! Can I book a keratin treatment this Saturday at 3pm?</div>
-      <span class="agent">agent translates and books</span>
-      <span class="who r">Owner · KakaoTalk</span>
-      <div class="b owner">토요일 오후 3시 케라틴 클리닉 예약 문의입니다.</div>
-      <div class="b owner">네 가능합니다! 성함 알려주세요.</div>
-      <span class="agent">back in English</span>
-      <div class="b tourist">Yes, that works! What name should I put it under?</div>
-    </div>
+    <figure class="shot" style="margin:0"><img src="photos/snap-bath.jpg" alt="An editorial portrait by June: a woman in a red qipao in a milky bath with petals and orange slices"><span>Shot by June · OWOL Snap</span></figure>
   </section>
 
   <dl class="facts">
     <div><dt>Role</dt><dd>Founder</dd></div>
-    <div><dt>For</dt><dd>Tourists × Seoul beauty shops</dd></div>
-    <div><dt>Research</dt><dd>20+ owner interviews</dd></div>
+    <div><dt>Started from</dt><dd>My own photo studio work</dd></div>
+    <div><dt>Built</dt><dd>Portrai, then a booking agent API</dd></div>
     <div><dt>Outcome</dt><dd>Stopped on purpose</dd></div>
   </dl>
 
   <!-- 01 -->
-  <section class="ch" id="problem">
+  <section class="ch" id="origin">
     <div class="col">
-      <span class="ch-num">01 · The problem</span>
-      <h2>Seoul's best salons are booked in Korean, on KakaoTalk</h2>
-      <p>Tourists come to Seoul for hair, nails, makeup and photo shoots. The shops they want are often small, owner-run and booked through KakaoTalk or Naver. Without a Korean phone setup or the language, a visitor can find the work on Instagram and still have no way to book it.</p>
+      <span class="ch-num">01 · Where it started</span>
+      <h2>Behind the camera</h2>
+      <p>Since 2020 I've run OWOL Snap as a working photographer, shooting actor profiles, album covers and portraits. A real share of my clients flew in from abroad. On those shoots I worked side by side with makeup artists and other beauty freelancers, and I kept hearing the same thing from both sides of the chair.</p>
     </div>
-    <div class="trades">
-      <div><b>Hair artists</b><span>Perm, cut, straightening, keratin and clinic care</span></div>
-      <div><b>Nail designers</b><span>Daily, design nails, extensions</span></div>
-      <div><b>Makeup artists</b><span>Daily, photo shoot, idol-style</span></div>
-      <div><b>Photographers</b><span>Portrait and snap sessions</span></div>
+    <div class="voices">
+      <div class="voice"><b>Artists and small shops</b><q>Unless you're a franchise with a system, handling and selling to foreign customers is really hard.</q></div>
+      <div class="voice"><b>Visiting customers</b><q>There wasn't enough consultation. I got a generic K-pop look that didn't suit my face.</q></div>
     </div>
-    <dl class="tr col">
-      <div class="tech"><dt>In tech</dt><dd>LLM agent that translates and handles booking requests inside existing messengers</dd></div>
-      <div class="human"><dt>For humans</dt><dd>Book the salon you found on Instagram, without speaking Korean or installing KakaoTalk.</dd></div>
-    </dl>
+    <div class="stats">
+      <div><strong>20%+</strong><span>of my shoots were for foreign clients</span></div>
+      <div><strong>20+</strong><span>actor profiles and 3+ album covers shot at OWOL Snap</span></div>
+      <div><strong>49.7%</strong><span>of visitors to Korea say they want a K-beauty experience (Creatrip 2026 survey)</span></div>
+    </div>
   </section>
 
   <!-- 02 -->
-  <section class="ch" id="v1">
+  <section class="ch" id="insight">
     <div class="col">
-      <span class="ch-num">02 · Version one</span>
-      <h2>A full booking platform for tourists</h2>
-      <p>The first plan was a two-sided platform: Pinterest-style browsing with the trust of a beauty review app. Artists upload their portfolios, tourists browse by taste, and each booking is routed to the channel the shop already uses, Naver Booking or a KakaoTalk channel, to keep the barrier low at launch.</p>
+      <span class="ch-num">02 · The insight</span>
+      <h2>Their hands are never free</h2>
+      <p>The language gap wasn't only at booking. It peaked during the work itself, when the artist needs to ask how short, how bold, which angle.</p>
     </div>
-    <div class="ia" aria-label="Version one information architecture, five consumer screens">
-      <div class="scr"><span class="v1tag">v1</span><h4>Home</h4><span class="ref">ref. Gangnam Unni</span>
-        <ul><li>Search</li><li>Category: hair, nails, makeup</li><li>Location</li><li>Detailed filters<ul><li>Hair: perm, cut, straight, keratin, clinic</li><li>Nails: daily, design, extensions</li><li>Makeup: daily, shoot, idol</li></ul></li></ul></div>
-      <div class="scr"><span class="v1tag">v1</span><h4>Product</h4><span class="ref">ref. Hot Pepper</span>
-        <ul><li>Up to 10 images</li><li>Book via chat</li><li>Shop and designer</li><li>Description</li></ul></div>
-      <div class="scr"><span class="v1tag">v1</span><h4>Shop</h4><span class="ref">ref. Hot Pepper</span>
-        <ul><li>Cover image</li><li>Lead designer profile</li><li>Phone and hours</li><li>Google Maps location</li><li>Product gallery</li></ul></div>
-      <div class="scr"><span class="v1tag">v1</span><h4>Messages</h4><span class="ref">ref. Karrot, Airbnb</span>
-        <ul><li>Booking date and time card</li><li>Reminder to both sides 15 min before</li><li>Auto-translation into each phone's language</li><li>Photo and video attachments</li></ul></div>
-      <div class="scr"><span class="v1tag">v1</span><h4>Profile</h4><span class="ref">ref. Catch Table</span>
-        <ul><li>Google, LINE and Apple sign-in</li><li>Archive of past bookings</li></ul></div>
+    <div class="insight">
+      <div><b>What I saw</b><h4>Mid-service, nobody can type</h4><p>A makeup artist holding a brush or a photographer holding a camera can't stop to type into a translator app.</p></div>
+      <div><b>Why existing tools failed</b><h4>OS translators drown in noise</h4><p>Built-in interpreters like Apple's pick up too much background sound in a busy studio or salon to be useful.</p></div>
     </div>
-    <p class="note">Early on, bookings would run on messages: translate the tourist's request, deliver it to the owner on KakaoTalk or SMS, and nudge the owner to reply on the platform.</p>
+    <dl class="tr col">
+      <div class="tech"><dt>In tech</dt><dd>Speech interpretation fine-tuned for beauty and photo sessions, with a human in the loop</dd></div>
+      <div class="human"><dt>For humans</dt><dd>The artist keeps working, and you still get exactly the look you asked for.</dd></div>
+    </dl>
   </section>
 
   <!-- 03 -->
-  <section class="ch" id="pivot">
+  <section class="ch" id="v1">
     <div class="col">
-      <span class="ch-num">03 · The pivot</span>
-      <h2>Too heavy for the people it served</h2>
-      <p>Talking with 20+ owners of lash salons, photo studios and similar shops changed the plan. They didn't want another channel that only added ad costs to the routes they already used. Many were already handling foreign customers with Papago and other tools they knew. And with LLMs, the language barrier was no longer something a whole platform had to solve.</p>
-      <p>So I kept the one part that mattered and dropped the rest.</p>
+      <span class="ch-num">03 · Version one</span>
+      <h2>Portrai, a makeover platform</h2>
+      <p>Portrai let tourists meet local photographers, makeup and fashion artists who fit their taste. It had three parts working together.</p>
     </div>
-    <div class="tbl">
-      <table>
-        <tr><th></th><th>Version one · platform</th><th>Version two · agent</th></tr>
-        <tr><td>Where owners work</td><td>A new app to learn and check</td><td class="v2">KakaoTalk, LINE, the messenger they already use</td></tr>
-        <tr><td>What tourists need</td><td>Download and sign up</td><td class="v2">Send a message</td></tr>
-        <tr><td>Language</td><td>Built-in translation layer</td><td class="v2">An LLM agent in the middle</td></tr>
-        <tr><td>What I build</td><td>Five consumer sections plus a shop side</td><td class="v2">One agent API</td></tr>
-      </table>
+    <div class="pillars">
+      <div><span class="tag">v1</span><b>1 · Interpretation AI</b><h4>Tuned for the chair</h4><p>Fine-tuned on the vocabulary and situations of photo shoots and beauty work, so it survives a noisy studio.</p></div>
+      <div><span class="tag">v1</span><b>2 · Human in the loop</b><h4>Interpreters, virtually in the room</h4><p>Low-cost student interpreters join the session by video when the AI isn't enough.</p></div>
+      <div><span class="tag">v1</span><b>3 · Platform</b><h4>Sell to global customers</h4><p>Portfolio-first discovery, booking and global payment, so small artists can meet customers before they land.</p></div>
     </div>
+    <div class="journey">
+      <div><b>Before the trip</b><p>Browse portfolios, pick an artist, consult and book</p><span class="money">Revenue: booking fee and artist ads</span></div>
+      <div><b>During the trip</b><p>Live interpretation during the session</p><span class="money">Revenue: interpretation fee</span></div>
+      <div><b>After the trip</b><p>Receive edited photos and leave a review</p><span class="money">Payout to the artist, minus fees</span></div>
+    </div>
+    <div class="ia" aria-label="Customer-side information architecture">
+      <div class="scr"><h4>Home</h4><span class="ref">ref. Gangnam Unni</span><ul><li>Search, category, location</li><li>Filters for hair, nails, makeup</li></ul></div>
+      <div class="scr"><h4>Product</h4><span class="ref">ref. Hot Pepper</span><ul><li>Up to 10 images</li><li>Book via chat</li></ul></div>
+      <div class="scr"><h4>Shop</h4><span class="ref">ref. Hot Pepper</span><ul><li>Lead artist profile</li><li>Hours, Google Maps</li></ul></div>
+      <div class="scr"><h4>Messages</h4><span class="ref">ref. Karrot, Airbnb</span><ul><li>Auto-translated chat</li><li>Reminder 15 min before</li></ul></div>
+      <div class="scr"><h4>Profile</h4><span class="ref">ref. Catch Table</span><ul><li>Google, LINE, Apple sign-in</li><li>Booking archive</li></ul></div>
+    </div>
+    <p class="cap">The booking side, designed as Pinterest-style browsing with the trust of a beauty review app.</p>
   </section>
 
   <!-- 04 -->
-  <section class="ch" id="v2">
+  <section class="ch" id="math">
     <div class="col">
-      <span class="ch-num">04 · Version two</span>
-      <h2>An agent that takes bookings for you</h2>
-      <p>The lighter version drops into the messengers shops already run. An agent sits in the middle, translates both ways and takes bookings from global customers on the owner's behalf.</p>
+      <span class="ch-num">04 · The math</span>
+      <h2>Unit economics and pricing</h2>
+      <p>I priced Portrai as a commission on a bundled makeover: consultation, makeup and a photo shoot. Then I checked whether one booking could pay for the human side of the service.</p>
     </div>
-    <div class="flow">
-      <div class="node"><b>Tourist</b><span>Messages in English, Japanese or any language</span></div>
-      <span class="arw">→</span>
-      <div class="node core"><b>OWOL agent</b><span>Translates, answers booking questions and confirms the slot</span></div>
-      <span class="arw">→</span>
-      <div class="node"><b>Owner</b><span>Sees it in Korean on KakaoTalk or LINE and replies as usual</span></div>
+    <div class="econ">
+      <div class="panel">
+        <h4>One booking</h4>
+        <div class="eq">
+          <span>Average ticket (consult + makeup + shoot)</span><span>₩350,000</span>
+          <span>Platform take rate</span><span>17%</span>
+          <span class="sum">Revenue per booking</span><span class="sum">₩59,500</span>
+        </div>
+        <div class="vs" style="margin-top:20px" role="img" aria-label="Revenue per booking of 59,500 won is less than a 2.5-hour human interpreter at 75,000 won">
+          <div class="r"><span>Revenue per booking</span><div class="bar take">₩59,500</div></div>
+          <div class="r"><span>Human interpreter, 2.5 h at ₩30,000/h</span><div class="bar cost">₩75,000</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h4>The plan I modeled</h4>
+        <table class="plan">
+          <tr><th>Year</th><th>Volume</th><th>Revenue</th></tr>
+          <tr><td>2026</td><td>100 bookings</td><td class="n">₩5.95M</td></tr>
+          <tr><td>2027</td><td>~150 / month, break-even in Q4</td><td class="n">₩89M</td></tr>
+          <tr><td>2028</td><td>~400 / month</td><td class="n">₩268M</td></tr>
+        </table>
+        <div class="market">
+          <div><b>TAM</b><strong>₩31.8T</strong><span>inbound tourist spend</span></div>
+          <div><b>SAM</b><strong>₩6.3T</strong><span>beauty services</span></div>
+          <div><b>SOM</b><strong>₩940B</strong><span>makeup and snap bookings</span></div>
+        </div>
+      </div>
     </div>
+    <p class="col" style="margin-top:24px">The model only worked if AI carried most of the interpretation and humans stepped in rarely. That put all the weight on how much artists and customers would pay for it.</p>
+    <div class="verdict">When I went to build it, willingness to pay was far too low.</div>
   </section>
 
   <!-- 05 -->
+  <section class="ch" id="v2">
+    <div class="col">
+      <span class="ch-num">05 · Version two</span>
+      <h2>A smaller idea: an agent inside the messenger</h2>
+      <p>I cut Portrai down to the one piece owners might pay for: an API-based agent that drops into KakaoTalk or LINE, translates both ways and takes bookings from global customers on the owner's behalf.</p>
+    </div>
+    <div class="split">
+      <div class="thread" role="img" aria-label="A tourist asks in English, the agent passes it to the owner in Korean on KakaoTalk, and the reply comes back in English">
+        <span class="who l">Tourist · English</span>
+        <div class="b tourist">Hi! Can I book a makeup and photo session this Saturday at 3pm?</div>
+        <span class="agent">agent translates and books</span>
+        <span class="who r">Owner · KakaoTalk</span>
+        <div class="b owner">토요일 오후 3시 메이크업과 촬영 예약 문의입니다.</div>
+        <div class="b owner">네 가능합니다! 성함 알려주세요.</div>
+        <span class="agent">back in English</span>
+        <div class="b tourist">Yes, that works! What name should I put it under?</div>
+      </div>
+      <div class="tbl">
+        <table class="cmp">
+          <tr><th></th><th><span class="tag">v1 · Portrai</span></th><th><span class="tag v2">v2 · Agent</span></th></tr>
+          <tr><td>Owners use</td><td>A new platform</td><td class="v2">The messenger they already use</td></tr>
+          <tr><td>Interpretation</td><td>Tuned AI plus human interpreters</td><td class="v2">An LLM agent</td></tr>
+          <tr><td>Customers</td><td>Book and pay on Portrai</td><td class="v2">Just send a message</td></tr>
+          <tr><td>To build</td><td>Platform, payments, interpreter ops</td><td class="v2">One agent API</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
   <section class="ch" id="stop">
     <div class="col">
-      <span class="ch-num">05 · The decision</span>
+      <span class="ch-num">06 · The decision</span>
       <h2>Why I stopped</h2>
-      <p>The business didn't add up, so I stopped before spending more.</p>
+      <p>Version two was cheap to build, which was also its problem.</p>
     </div>
     <div class="reasons">
-      <div><b>1</b><h4>Costs vs. willingness to pay</h4><p>Token and build costs outran what owners would pay.</p></div>
-      <div><b>2</b><h4>Traffic wasn't enough</h4><p>Owners would pay for proven revenue lift. New global traffic alone didn't justify it.</p></div>
-      <div><b>3</b><h4>No defensible edge</h4><p>Against incumbents, I found no edge I could defend.</p></div>
+      <div><b>1</b><h4>Free alternatives were too strong</h4><p>LLMs, Papago and the translation now built into messengers made interpretation nearly free. Owners already had something good enough.</p></div>
+      <div><b>2</b><h4>Global customers felt like a burden</h4><p>My target was small owners who aren't fluent in English. For many of them, more foreign customers meant more work and more stress, not just more revenue.</p></div>
     </div>
-    <p class="quote col">“Owners would pay for proven revenue lift. New traffic alone wasn't enough.”</p>
+    <div class="paradox" aria-label="The paradox">
+      <div><b>Remove the language barrier</b><h4>Interpreters and tuned AI</h4><p>Costs too much to sell</p></div>
+      <span class="x">or</span>
+      <div><b>Keep the barrier, add convenience</b><h4>A translation agent</h4><p>Not enough to sell</p></div>
+    </div>
+    <p class="quote col">Removing the barrier cost too much. Keeping it made the product too thin to sell. So I closed the business.</p>
   </section>
 
   <div class="next">
