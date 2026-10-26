@@ -35,7 +35,7 @@ I build AI products people trust and actually use.
 - AI-first story for C-level keynotes at CES 2025, MWC, DTW Ignite, and AWS Summit Seoul (26,000+ executives)
 
 ## Building now
-- OWOL Archive, Founder (2025-2026): AI booking and translation agent; 20+ owner interviews; pivoted into existing messengers; halted after weighing costs against willingness to pay
+- OWOL Archive, Founder (2025-2026): AI booking and translation agent; 20+ owner interviews; pivoted into existing messengers; halted after weighing costs against willingness to pay; started as a beauty booking platform for tourists (hair, nails, makeup, photo) and was cut down to one agent. Story: https://junelim12.github.io/owol.html
 - Kaybridge (venture, 2026): AI platform routing Bay Area startups to decision owners inside Korean enterprises; one deal done by hand, cold to preferred bidder in ~4 months. Case study: https://junelim12.github.io/kaybridge.html
 - Master Yun (hackathon, AWS Loft, 2026): voice-guided Korean saju reader that blends the Four Pillars with Western astrology; reading engine built on GitHub, app in Lovable, voice via the ElevenLabs API. Live: https://karma-key-generator.lovable.app · Story: https://junelim12.github.io/saju.html
 - BaeAI (product concept, 2026): Hinge-style dating app for North American women where every match is an AI Korean man; hidden match tiers, unlockable dates, photos and calls, relationship state machine with endings. 48-screen wireframe. Story: https://junelim12.github.io/baeai.html
