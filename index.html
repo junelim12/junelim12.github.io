@@ -149,6 +149,23 @@ details.more ul{margin:14px 0 0;padding-left:18px;display:flex;flex-direction:co
 .pair > article{display:flex;flex-direction:column;gap:18px;min-width:0}
 
 /* fire chart */
+/* Incheon stat thumbnail: sized by its own width so it reads at every breakpoint */
+.slot.stat{background:#23307A;color:#F4F3F0;container-type:inline-size}
+.st-in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:5cqw 5.5cqw}
+.st-top{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:max(9px,2.1cqw);letter-spacing:.08em;text-transform:uppercase;color:rgba(244,243,240,.75)}
+.st-key{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.st-key i{display:inline-block;width:1.8cqw;height:1.8cqw;min-width:7px;min-height:7px;background:rgba(244,243,240,.3)}
+.st-key i.a{background:#F4F3F0;margin-left:6px}
+.st-hero{display:flex;align-items:flex-end;gap:3cqw}
+.st-hero b{font-family:var(--display);font-weight:800;font-stretch:80%;letter-spacing:-.04em;font-size:17cqw;line-height:.8;font-variant-numeric:tabular-nums}
+.st-hero span{font-size:max(11px,2.6cqw);line-height:1.35;color:rgba(244,243,240,.8);padding-bottom:.6cqw}
+.st-rows{display:grid;gap:1.6cqw}
+.st-r{display:grid;grid-template-columns:20cqw 1fr 9cqw;gap:2.4cqw;align-items:center;font-size:max(10px,2.3cqw)}
+.st-r span{color:rgba(244,243,240,.8);white-space:nowrap}
+.st-r em{font-style:normal;font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.st-b{position:relative;height:2.6cqw;min-height:8px;background:rgba(244,243,240,.1)}
+.st-b i{position:absolute;left:0;top:0;bottom:0;background:rgba(244,243,240,.3)}
+.st-b i.a{background:#F4F3F0;top:35%}
 .chart{background:var(--card);border:1px solid var(--line);border-radius:2px;padding:18px;display:grid;gap:12px}
 .chart .row{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}
 .chart .row > span{font-size:13px;color:var(--muted)}
@@ -351,8 +368,16 @@ footer a:hover,.copy-inline:hover{border-color:var(--honey)}
     </div>
     <div class="pair">
       <article>
-        <figure class="slot" style="aspect-ratio:16/10">
-          <div class="ph"><span>Photo · Incheon Fire Department</span><b>Firefighters at the station, the partnership meeting, or the caller-ID screen on a citizen's phone.</b></div>
+        <figure class="slot stat" style="aspect-ratio:16/10" role="img" aria-label="Incheon Fire Department callbacks, before and after: emergency call success 74.7% to 85.8%, immediate connection 64.9% to 71.9%, missed-call callbacks 27.9% to 49.5%">
+          <div class="st-in">
+            <div class="st-top"><span>Incheon Fire Dept. · callbacks</span><span class="st-key"><i></i>Before <i class="a"></i>After</span></div>
+            <div class="st-hero"><b>85.8%</b><span>emergency calls connected<br>up from 74.7%</span></div>
+            <div class="st-rows">
+              <div class="st-r"><span>Call success</span><div class="st-b"><i style="width:74.7%"></i><i class="a" style="width:85.8%"></i></div><em>+11.1</em></div>
+              <div class="st-r"><span>Immediate</span><div class="st-b"><i style="width:64.9%"></i><i class="a" style="width:71.9%"></i></div><em>+7.0</em></div>
+              <div class="st-r"><span>Callbacks</span><div class="st-b"><i style="width:27.9%"></i><i class="a" style="width:49.5%"></i></div><em>+21.6</em></div>
+            </div>
+          </div>
         </figure>
         <span class="meta">Incheon Fire Department × SK Telecom</span>
         <h3>Why people stopped answering firefighters</h3>
@@ -361,12 +386,6 @@ footer a:hover,.copy-inline:hover{border-color:var(--honey)}
           <div class="tech"><dt>In tech</dt><dd>Spam-filter false positives on first-responder numbers</dd></div>
           <div class="human"><dt>For humans</dt><dd>You pick up when a firefighter calls back.</dd></div>
         </dl>
-        <div class="chart" role="img" aria-label="Before and after: emergency call success 74.7% to 85.8%, immediate connection 64.9% to 71.9%, missed-call callbacks 27.9% to 49.5%">
-          <div class="key"><span><i></i>Before</span><span><i class="a"></i>After</span></div>
-          <div class="row"><span>Emergency call success</span><div class="bars"><div class="bar"><i style="width:74.7%"></i><em>74.7%</em></div><div class="bar after"><i style="width:85.8%"></i><em>85.8%</em></div></div></div>
-          <div class="row"><span>Immediate connection</span><div class="bars"><div class="bar"><i style="width:64.9%"></i><em>64.9%</em></div><div class="bar after"><i style="width:71.9%"></i><em>71.9%</em></div></div></div>
-          <div class="row"><span>Missed-call callbacks</span><div class="bars"><div class="bar"><i style="width:27.9%"></i><em>27.9%</em></div><div class="bar after"><i style="width:49.5%"></i><em>49.5%</em></div></div></div>
-        </div>
       </article>
       <article>
         <figure class="slot" style="aspect-ratio:16/10">
