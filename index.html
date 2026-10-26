@@ -226,8 +226,9 @@ details.more ul{margin:14px 0 0;padding-left:18px;display:flex;flex-direction:co
 .eye h2{font-size:clamp(32px,3.6vw,48px);line-height:1.1}
 .eye p{color:var(--muted);margin:16px 0 0;max-width:40ch}
 .eye a{font-family:var(--mono);font-size:12px}
-.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .strip .slot{aspect-ratio:3/4}
+.strip .slot.wide{grid-column:span 2;aspect-ratio:auto}
 .strip .slot .ph b{font-size:15px}
 
 /* timeline */
@@ -269,6 +270,7 @@ footer a:hover,.copy-inline:hover{border-color:var(--honey)}
   .case.flip .media{order:0}
   .build{grid-template-columns:repeat(2,1fr)}
   .strip{grid-template-columns:repeat(2,1fr)}
+  .strip .slot.wide{aspect-ratio:3/2}
   .tl li{grid-template-columns:1fr;gap:2px}
   footer .wrap{grid-template-columns:1fr}
   .chapter{padding-block:72px 16px}
@@ -520,10 +522,11 @@ footer a:hover,.copy-inline:hover{border-color:var(--honey)}
       <p><a href="https://www.instagram.com/owol_snap/" target="_blank" rel="noopener">@owol_snap ↗</a></p>
     </div>
     <div class="strip">
-      <figure class="slot"><div class="ph"><span>Your photo</span><b>Portrait</b></div></figure>
-      <figure class="slot"><div class="ph"><span>Your photo</span><b>Portrait</b></div></figure>
-      <figure class="slot"><div class="ph"><span>Your photo</span><b>Street or place</b></div></figure>
-      <figure class="slot"><div class="ph"><span>Your photo</span><b>Portrait</b></div></figure>
+      <figure class="slot"><img src="photos/snap-fabric.jpg" alt="Studio portrait of a woman wrapped in sheer floral fabric in pastel blue and lilac" loading="lazy" style="object-position:50% 30%"></figure>
+      <figure class="slot"><img src="photos/snap-bath.jpg" alt="A woman in a red qipao lying in a milky bath scattered with petals and dried orange slices" loading="lazy"></figure>
+      <figure class="slot"><img src="photos/snap-bar.jpg" alt="A bartender reaching for a bottle on a wall of whisky shelves in a warmly lit bar" loading="lazy" style="object-position:60% 50%"></figure>
+      <figure class="slot wide"><img src="photos/snap-wedding.jpg" alt="A couple laughing under a white veil on the grass, holding a yellow bouquet" loading="lazy" style="object-position:50% 40%"></figure>
+      <figure class="slot"><img src="photos/snap-party.jpg" alt="Five friends in sequined dresses and cat-eye sunglasses celebrating in an elevator" loading="lazy" style="object-position:50% 40%"></figure>
     </div>
   </section>
 
