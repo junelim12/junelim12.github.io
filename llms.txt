@@ -1,7 +1,7 @@
 # June Lim
 
 Technology, translated for humans.
-I build AI products people trust and actually use.
+Building AI products people trust and actually use.
 
 - Email: junelim@berkeley.edu
 - LinkedIn: https://www.linkedin.com/in/jeeyoon-june-lim/
