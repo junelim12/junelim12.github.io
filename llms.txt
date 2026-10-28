@@ -2,12 +2,13 @@
 
 Technology, translated for humans.
 Building AI products people trust and actually use.
+Focus: deploying AI into real organizations and measuring that it works, especially between US AI companies and Korean enterprises.
 
 - Email: junelim@berkeley.edu
 - LinkedIn: https://www.linkedin.com/in/jeeyoon-june-lim/
 - GitHub: https://github.com/junelim12
 - Location: Berkeley, CA
-- Seeking: Summer 2027 roles in AI product and AI go-to-market
+- Seeking: Summer 2027 roles in AI deployment (deployment strategy, solutions), AI product and go-to-market
 
 ## Use
 ### A.Phone, SK Telecom (AI Product Manager, 2021-2024)
@@ -22,7 +23,7 @@ Building AI products people trust and actually use.
 - Fixed spam filtering that hid firefighters' callbacks; added caller ID for first responders
 - Emergency call success 74.7% to 85.8%; missed-call callbacks 27.9% to 49.5%
 ### AI safety at launch
-- Hallucination launch criteria agreed by engineering and legal
+- Hallucination evaluation criteria set as launch gates, agreed by engineering and legal
 - Privacy masking false positives cut 36%
 
 ## Translate
@@ -31,6 +32,9 @@ Building AI products people trust and actually use.
 - Integrated OpenAI, Anthropic, AWS, and Adobe
 - Exclusive OpenAI B2C partnership at 75% below the initial ask
 - Together AI investment; LLM serving costs cut 30%
+### Telco LLM (Global Telco AI Alliance)
+- Coordinated SKT's use case with AWS and Anthropic: foundation model fine-tuned on contact center calls, RAG on AWS, AI contact center PoC
+- Faded before other carriers adopted it, as foundation model progress outpaced fine-tuning cycles
 ### Keynote narrative
 - AI-first story for C-level keynotes at CES 2025, MWC, DTW Ignite, and AWS Summit Seoul (26,000+ executives)
 
