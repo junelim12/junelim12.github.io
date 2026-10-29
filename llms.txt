@@ -39,11 +39,11 @@ Focus: deploying AI into real organizations and measuring that it works, especia
 - AI-first story for C-level keynotes at CES 2025, MWC, DTW Ignite, and AWS Summit Seoul (26,000+ executives)
 
 ## Building now
+- Human Takeaway (side project, 2026): upload a talk or panel recording, type the one line that stayed with you (pasting disabled), and get an X post and a LinkedIn post grounded in the transcript; two-pass LLM plan-then-write, four writing roles (job seeker, marketer, founder, builder), saved library of lines. Story: https://junelim12.github.io/human-takeaway.html
 - OWOL Archive, Founder (2025-2026): AI booking and translation agent; 20+ owner interviews; pivoted into existing messengers; halted after weighing costs against willingness to pay; began from my own photo studio work with foreign clients; v1 Portrai paired beauty-tuned interpretation AI with human interpreters and a booking platform (₩350K avg ticket, 17% take rate), but willingness to pay was too low; v2 messenger agent API was outrun by free tools like LLMs and Papago. Story: https://junelim12.github.io/owol.html
 - Kaybridge (side project, 2026): AI platform routing Bay Area startups to decision owners inside Korean enterprises; one deal done by hand, cold to preferred bidder in ~4 months. Case study: https://junelim12.github.io/kaybridge.html
 - Master Yun (hackathon, AWS Loft, 2026): voice-guided Korean saju reader that blends the Four Pillars with Western astrology; reading engine built on GitHub, app in Lovable, voice via the ElevenLabs API. Live: https://karma-key-generator.lovable.app · Story: https://junelim12.github.io/saju.html
 - BaeAI (product concept, 2026): Hinge-style dating app for North American women where every match is an AI Korean man; hidden match tiers, unlockable dates, photos and calls, relationship state machine with endings. 48-screen wireframe. Story: https://junelim12.github.io/baeai.html
-- Human Takeaway (side project, 2026): upload a talk or panel recording, type the one line that stayed with you (pasting disabled), and get an X post and a LinkedIn post grounded in the transcript; two-pass LLM plan-then-write, three writing roles, saved library of lines. Story: https://junelim12.github.io/human-takeaway.html
 
 ## Education
 - UC Berkeley Haas, MBA (expected 2028), AI for Business Certificate
