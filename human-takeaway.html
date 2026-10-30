@@ -104,6 +104,7 @@ section.ch{padding-block:88px 0}
 .next p{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
 .btn{font-size:14px;font-weight:500;text-decoration:none;padding:10px 18px;border-radius:2px;border:1px solid var(--line);background:var(--card)}
 .btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
 
 @media (max-width:900px){
   .facts{grid-template-columns:repeat(2,1fr)}
@@ -138,12 +139,13 @@ section.ch{padding-block:88px 0}
     <span class="eyebrow">Side project · Voice AI · 2026</span>
     <h1>Human Takeaway</h1>
     <p class="dek">AI can write the post. The takeaway has to be yours.</p>
+    <div class="cta"><a class="btn solid" href="https://human-takeaway.vercel.app/" target="_blank" rel="noopener">Try Human Takeaway ↗</a><a class="btn" href="#problem">Read the story</a></div>
     <figure class="screen" style="margin-top:32px"><img src="photos/ht-home.jpg" alt="Human Takeaway home screen: Spread the word, drop a recording or transcript, with a four-step how it works card"></figure>
     <dl class="facts">
       <div><dt>What</dt><dd>Talk recording → X and LinkedIn posts</dd></div>
       <div><dt>Input</dt><dd>Audio or transcript, plus your one line</dd></div>
-      <div><dt>Built with</dt><dd>Claude, speech-to-text, Supabase</dd></div>
-      <div><dt>Status</dt><dd>Working prototype</dd></div>
+      <div><dt>Built with</dt><dd>Claude, speech-to-text, Supabase, Vercel</dd></div>
+      <div><dt>Status</dt><dd>Live on Vercel</dd></div>
     </dl>
   </section>
 
@@ -152,8 +154,8 @@ section.ch{padding-block:88px 0}
     <div class="col">
       <span class="ch-num">01 · The problem</span>
       <h2>Event posts recap the speaker, and everyone's sounds the same</h2>
-      <p>After a good talk, panel or founder dinner, the post you write is how people see what you think. Most of those posts summarize what someone else said on stage. Ask an AI to write one and it gets more fluent and even less yours.</p>
-      <p>The part worth reading is the one thing that stuck with you. So I built the tool around that.</p>
+      <p>Event posts mostly recap what someone else said on stage. Ask an AI to write one and it gets smoother and less yours.</p>
+      <p>The part worth reading is what stuck with you, so the tool is built around that.</p>
     </div>
     <dl class="tr col">
       <div class="tech"><dt>In tech</dt><dd>Speech-to-text, then an LLM that plans a thesis from your line and grounds it in the transcript</dd></div>
@@ -166,7 +168,7 @@ section.ch{padding-block:88px 0}
     <div class="col">
       <span class="ch-num">02 · The key decision</span>
       <h2>The one line you have to type yourself</h2>
-      <p>Everything is built around a single line of up to 140 characters: the takeaway you'd repeat to a friend. Pasting is turned off for that box on purpose. If the line is yours, the post is yours, however much the AI writes around it.</p>
+      <p>Everything hangs on one line of up to 140 characters: the takeaway you'd repeat to a friend. Pasting is off for that box on purpose. If the line is yours, the post is yours.</p>
     </div>
     <figure class="fig"><img src="photos/ht-line.jpg" alt="The one line that stayed with you, typed by hand: Nobody buys a model. They buy back the hours their team loses." loading="lazy"><figcaption>Type it yourself. Pasting is off here, because this line is what makes the post yours.</figcaption></figure>
   </section>
@@ -186,9 +188,9 @@ section.ch{padding-block:88px 0}
     <div class="split">
       <div class="roles">
         <div class="role"><b>Job seeker</b><span>Show how you think, so hiring managers notice. Never begs for a job.</span></div>
-        <div class="role"><b>Marketer</b><span>Put the spotlight on the company or product behind the event, without sounding like an ad.</span></div>
+        <div class="role"><b>Marketer</b><span>Spotlight the company or product behind the event, without sounding like an ad.</span></div>
         <div class="role"><b>Founder</b><span>Earn trust with a clear take, without pitching.</span></div>
-        <div class="role"><b>Builder</b><span>Turn what you heard into what you'd build or ship, written from the workbench.</span></div>
+        <div class="role"><b>Builder</b><span>Turn what you heard into what you'd build or ship.</span></div>
       </div>
       <figure class="fig" style="margin:0"><img src="photos/ht-roles.jpg" alt="Writing as: Job seeker, Marketer, Founder or Builder" loading="lazy"></figure>
     </div>
@@ -199,7 +201,7 @@ section.ch{padding-block:88px 0}
     <div class="col">
       <span class="ch-num">04 · Under the hood</span>
       <h2>Plan the argument first, then write</h2>
-      <p>The writing runs in two passes. An editor pass decides what your line actually argues and which details prove it. Only then does a writer pass draft each post in the voice of that channel.</p>
+      <p>Two passes. An editor decides what your line argues and which details prove it. Then a writer drafts each post in that channel's voice.</p>
     </div>
     <div class="pipe">
       <div class="stage"><b>Pass 1 · Editor</b><h4>Decide the argument</h4>
@@ -210,7 +212,7 @@ section.ch{padding-block:88px 0}
     </div>
     <ul class="rules">
       <li><b>Never invent</b><span>No facts, names, numbers or quotes that aren't in the transcript or your line.</span></li>
-      <li><b>Distrust the transcript</b><span>Auto transcripts mishear names and numbers, so it only uses them when context makes them clearly right.</span></li>
+      <li><b>Distrust the transcript</b><span>Names and numbers are used only when context makes them clearly right.</span></li>
       <li><b>Keep credit straight</b><span>A speaker's story stays the speaker's. You were in the audience unless the transcript shows otherwise.</span></li>
       <li><b>No bait</b><span>No hashtags, no emoji, no "Agree?". Posts end on your own thought unless you turn on a light call to action.</span></li>
     </ul>
@@ -221,14 +223,14 @@ section.ch{padding-block:88px 0}
     <div class="col">
       <span class="ch-num">05 · My lines</span>
       <h2>Your takeaways become a map of your thinking</h2>
-      <p>Every line you write is saved with the event and tags for industry and function, suggested from the transcript. Over time the library shows where your thinking goes. Sign in with Google to keep lines across devices, and mark each one public or private.</p>
+      <p>Each line is saved with the event and auto-suggested industry and function tags. Over time the library shows where your thinking goes. Google sign-in syncs it; each line can be public or private.</p>
     </div>
     <figure class="fig"><img src="photos/ht-lines.jpg" alt="My lines library: What stayed with you, three saved lines with event names and tags, and charts of where your thinking goes by industry and function" loading="lazy"><figcaption>The library with example lines.</figcaption></figure>
   </section>
 
   <div class="next">
-    <p>Want to try it after your next event?</p>
-    <a class="btn solid" href="./#contact">Ask me for access</a>
+    <p>Try it after your next event.</p>
+    <a class="btn solid" href="https://human-takeaway.vercel.app/" target="_blank" rel="noopener">Try Human Takeaway ↗</a>
   </div>
 
 </main>
